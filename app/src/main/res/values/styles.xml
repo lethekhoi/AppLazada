@@ -5,7 +5,19 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/bgLogo</item>
+
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+    </style>
+
+    <style name="capfalse" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+
+    </style>
+
+    <style name="menuitemcolor" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/bgToolbar</item>
+
     </style>
 
 </resources>

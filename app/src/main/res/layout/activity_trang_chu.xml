@@ -9,7 +9,10 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+
+        android:layout_height="wrap_content"
+        android:background="@color/bgToolbar">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,35 +21,72 @@
 
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarTrangChu"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/menuitemcolor"
+                app:logo="@drawable/logo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/bgsearch"
                 android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite"
+                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:paddingLeft="10dp"
+                    android:text="Tìm Kiếm Trên Lazada"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+
+                    android:textColor="@color/colorGray" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/bgToolbar" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_photo_camera_black_24dp" />
 
             </LinearLayout>
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="scrollable"
+                app:tabTextAppearance="@style/capfalse"
 
+                app:tabTextColor="@color/colorGray">
 
-
+            </com.google.android.material.tabs.TabLayout>
         </LinearLayout>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:tabMode="scrollable">
 
-        </com.google.android.material.tabs.TabLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
 
