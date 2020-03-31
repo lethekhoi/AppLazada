@@ -1,0 +1,2 @@
+rootProject.name='AppLazada'
+include ':app'
