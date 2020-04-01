@@ -52,6 +52,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@color/bgToolbar" />
@@ -79,6 +80,24 @@
             </com.google.android.material.tabs.TabLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtMaLoaiCha"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="Mã Loại cha" />
+
+            <Button
+                android:id="@+id/btnlaydulieu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lấy dữ liệu" />
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

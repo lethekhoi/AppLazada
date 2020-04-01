@@ -13,9 +13,9 @@
         android:layout_height="match_parent"
         android:background="#80f67122"
         android:orientation="vertical"
-        android:paddingLeft="110dp"
-        android:paddingTop="100dp"
-        android:paddingRight="110dp">
+        android:paddingLeft="90dp"
+        android:paddingTop="50dp"
+        android:paddingRight="90dp">
 
         <ImageView
             android:layout_width="wrap_content"
