@@ -1,8 +1,10 @@
 package com.example.applazada.View.TrangChu;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.net.Uri;
@@ -17,7 +19,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.applazada.Adapter.ViewPagerAdapter;
+import com.example.applazada.Model.ObjectClass.LoaiSanPham;
 import com.example.applazada.Model.TrangChu.DownloadDuLieu;
+import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -31,31 +35,48 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class TrangChuActivity extends AppCompatActivity {
+public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu {
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;
     EditText editTextMaloaicha;
     Button btnlaydulieu;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trang_chu);
+
+        drawerLayout = findViewById(R.id.drawerlayouttrangchu);
         editTextMaloaicha = findViewById(R.id.edtMaLoaiCha);
         btnlaydulieu = findViewById(R.id.btnlaydulieu);
 
         viewPager = findViewById(R.id.viewpager);
+
+
         toolbar = findViewById(R.id.toolbarTrangChu);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(drawerToggle);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drawerToggle.syncState();
+
 
         tabLayout = findViewById(R.id.tabs);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        PresenterLogicXuLyMenu logicXuLyMenu = new PresenterLogicXuLyMenu(this);
+        logicXuLyMenu.LayDanhSachMenu();
 
 
         btnlaydulieu.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +115,16 @@ public class TrangChuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
+
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return true;
     }
 
 
+    @Override
+    public void HienThiDanhSachMenu(List<LoaiSanPham> loaiSanPhamList) {
+        Log.d("kiemtra", loaiSanPhamList.get(0).getTENLOAISP());
+    }
 }

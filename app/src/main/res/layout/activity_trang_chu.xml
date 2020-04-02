@@ -1,113 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerlayouttrangchu"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".View.TrangChu.TrangChuActivity">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-        android:background="@color/bgToolbar">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarTrangChu"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/menuitemcolor"
-                app:logo="@drawable/logo" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/bgsearch"
-                android:orientation="horizontal">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorWhite"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:paddingLeft="10dp"
-                    android:text="Tìm Kiếm Trên Lazada"
-                    android:textAlignment="textStart"
-                    android:textAllCaps="false"
-
-                    android:textColor="@color/colorGray" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/bgToolbar" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@color/colorWhite"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_photo_camera_black_24dp" />
-
-            </LinearLayout>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabMode="scrollable"
-                app:tabTextAppearance="@style/capfalse"
-
-                app:tabTextColor="@color/colorGray">
-
-            </com.google.android.material.tabs.TabLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edtMaLoaiCha"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:hint="Mã Loại cha" />
-
-            <Button
-                android:id="@+id/btnlaydulieu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lấy dữ liệu" />
-
-        </LinearLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <FrameLayout
+        android:id="@+id/contentTrangChu"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.ViewPager>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".View.TrangChu.TrangChuActivity">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:background="@color/bgToolbar">
 
 
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbarTrangChu"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:theme="@style/menuitemcolor"
+                        app:logo="@drawable/logo" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/bgsearch"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorWhite"
+                            android:drawableLeft="@drawable/ic_search_black_24dp"
+                            android:paddingLeft="10dp"
+                            android:text="Tìm Kiếm Trên Lazada"
+                            android:textAlignment="textStart"
+                            android:textAllCaps="false"
+
+                            android:textColor="@color/colorGray" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/bgToolbar" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:background="@color/colorWhite"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_photo_camera_black_24dp" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:tabMode="scrollable"
+                        app:tabTextAppearance="@style/capfalse"
+
+                        app:tabTextColor="@color/colorGray">
+
+                    </com.google.android.material.tabs.TabLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtMaLoaiCha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:hint="Mã Loại cha" />
+
+                    <Button
+                        android:id="@+id/btnlaydulieu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lấy dữ liệu" />
+
+                </LinearLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.viewpager.widget.ViewPager>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <ExpandableListView
+        android:id="@+id/epMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorWhite">
+
+    </ExpandableListView>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
