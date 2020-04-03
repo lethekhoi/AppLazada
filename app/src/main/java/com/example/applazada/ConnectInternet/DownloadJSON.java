@@ -21,18 +21,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DownloadJSON extends AsyncTask<String, Void, String> {
+public class DownloadJSON extends AsyncTask<String,Void,String> {
     String duongdan;
-    List<HashMap<String, String>> attrs;
+    List<HashMap<String,String>> attrs;
     StringBuilder dulieu;
-    Boolean method = true;
+    boolean method = true;
 
-    public DownloadJSON(String duongdan) {
+    public DownloadJSON(String duongdan){
         this.duongdan = duongdan;
         method = true;
     }
 
-    public DownloadJSON(String duongdan, List<HashMap<String, String>> attrs) {
+    public DownloadJSON(String duongdan, List<HashMap<String,String>> attrs){
         this.duongdan = duongdan;
         this.attrs = attrs;
         method = false;
@@ -44,10 +44,10 @@ public class DownloadJSON extends AsyncTask<String, Void, String> {
         try {
             URL url = new URL(duongdan);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.connect();
-            if (!method) {
+
+            if(!method){
                 data = methodPost(httpURLConnection);
-            } else {
+            }else{
                 data = methodGet(httpURLConnection);
             }
 
@@ -58,22 +58,22 @@ public class DownloadJSON extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
 
-        Log.d("dulieu", data);
+        Log.d("dulieu",data);
         return data;
     }
 
-
-    private String methodGet(HttpURLConnection httpURLConnection) {
+    private String methodGet(HttpURLConnection httpURLConnection){
         String data = "";
         InputStream inputStream = null;
         try {
+            httpURLConnection.connect();
             inputStream = httpURLConnection.getInputStream();
             InputStreamReader reader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             dulieu = new StringBuilder();
             String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) !=null){
                 dulieu.append(line);
             }
 
@@ -81,42 +81,45 @@ public class DownloadJSON extends AsyncTask<String, Void, String> {
             bufferedReader.close();
             reader.close();
             inputStream.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
         return data;
     }
 
-    private String methodPost(HttpURLConnection httpURLConnection) {
+    private String methodPost(HttpURLConnection httpURLConnection){
         String data = "";
         String key = "";
         String value = "";
+
         try {
             httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoInput(true);
             httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+
             Uri.Builder builder = new Uri.Builder();
+
             int count = attrs.size();
-            for (int i = 0; i < count; i++) {
-                for (Map.Entry<String, String> values : attrs.get(i).entrySet()) {
+            for(int i=0;i<count;i++){
+
+                for(Map.Entry<String,String> values : attrs.get(i).entrySet()){
                     key = values.getKey();
                     value = values.getValue();
                 }
-                builder.appendQueryParameter(key, value);
 
+                builder.appendQueryParameter(key,value);
             }
             String query = builder.build().getEncodedQuery();
+
             OutputStream outputStream = httpURLConnection.getOutputStream();
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-            BufferedWriter writer = new BufferedWriter(outputStreamWriter);
+            OutputStreamWriter streamWriter = new OutputStreamWriter(outputStream);
+            BufferedWriter writer = new BufferedWriter(streamWriter);
+
             writer.write(query);
             writer.flush();
             writer.close();
-
-            outputStreamWriter.close();
+            streamWriter.close();
             outputStream.close();
 
             data = methodGet(httpURLConnection);
@@ -127,8 +130,8 @@ public class DownloadJSON extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
 
+
         return data;
     }
-
 
 }
