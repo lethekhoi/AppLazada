@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.example.applazada.Model.ObjectClass.LoaiSanPham;
 import com.example.applazada.Model.TrangChu.DownloadDuLieu;
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
+import com.example.applazada.View.DangNhap.DangNhapActivity;
 import com.google.android.material.tabs.TabLayout;
 
 import java.io.BufferedReader;
@@ -121,6 +123,14 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
 
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
+        }
+
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.itDangNhap:
+                Intent itDangNhap = new Intent(this, DangNhapActivity.class);
+                startActivity(itDangNhap);
         }
         return true;
     }
