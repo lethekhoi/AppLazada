@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.example.applazada.Adapter.ViewPagerAdapterDangNhap;
@@ -23,9 +24,10 @@ public class DangNhapActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayoutDangNhap);
         viewPager = findViewById(R.id.viewpagerDangNhap);
         toolbar = findViewById(R.id.toolbarDangNhap);
-
+        toolbar.setTitle("Đăng Nhập/Đăng xuất");
+        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Đăng Nhập/Đăng ký");
+
 
         ViewPagerAdapterDangNhap viewPagerAdapterDangNhap = new ViewPagerAdapterDangNhap(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapterDangNhap);

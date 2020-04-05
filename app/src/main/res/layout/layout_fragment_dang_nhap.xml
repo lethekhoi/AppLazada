@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,7 +14,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Địa chỉ Email" />
+            android:hint="Địa chỉ Email"
+            android:textColor="@color/colorBlack" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -21,10 +23,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <EditText
+        <com.example.applazada.CustomView.PasswordEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mật khẩu" />
+            android:hint="Mật khẩu"
+            android:textColor="@color/colorBlack"
+            app:useStrike="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
