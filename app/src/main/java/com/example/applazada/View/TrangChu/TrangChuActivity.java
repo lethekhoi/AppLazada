@@ -16,8 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
 import com.example.applazada.Model.TrangChu.DownloadDuLieu;
@@ -46,6 +48,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
     Button btnlaydulieu;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
+    ExpandableListView expandableListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,8 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
         drawerLayout = findViewById(R.id.drawerlayouttrangchu);
         editTextMaloaicha = findViewById(R.id.edtMaLoaiCha);
         btnlaydulieu = findViewById(R.id.btnlaydulieu);
-
         viewPager = findViewById(R.id.viewpager);
+        expandableListView = findViewById(R.id.epMenu);
 
 
         toolbar = findViewById(R.id.toolbarTrangChu);
@@ -126,5 +129,8 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
     @Override
     public void HienThiDanhSachMenu(List<LoaiSanPham> loaiSanPhamList) {
         Log.d("kiemtra", loaiSanPhamList.get(0).getTENLOAISP());
+        ExpandAdapter expandAdapter = new ExpandAdapter(this, loaiSanPhamList);
+        expandableListView.setAdapter(expandAdapter);
+        expandAdapter.notifyDataSetChanged();
     }
 }
