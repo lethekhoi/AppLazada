@@ -26,6 +26,7 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
 
     Context context;
     List<LoaiSanPham> loaiSanPhams;
+    ViewHolderMenu viewHolderMenu;
 
     public ExpandAdapter(Context context, List<LoaiSanPham> loaiSanPhams) {
         this.context = context;
@@ -81,16 +82,35 @@ public class ExpandAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+
+    public class ViewHolderMenu {
+        TextView txtTenLoaiSP;
+        ImageView hinhMenu;
+
+    }
+
     @Override
     public View getGroupView(final int vitriGroupCha, boolean isExpanded, View view, ViewGroup viewGroup) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View viewGroupCha = layoutInflater.inflate(R.layout.custom_layout_group_cha, viewGroup, false);
-        TextView txtTenLoaiSP = viewGroupCha.findViewById(R.id.txtTenLoaiSP);
-        ImageView imageView = viewGroupCha.findViewById(R.id.imgMenuPlus);
-        txtTenLoaiSP.setText(loaiSanPhams.get(vitriGroupCha).getTENLOAISP());
+
+        View viewGroupCha = view;
+        if (viewGroupCha == null) {
+            viewHolderMenu = new ViewHolderMenu();
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            viewGroupCha = layoutInflater.inflate(R.layout.custom_layout_group_cha, viewGroup, false);
+            viewHolderMenu.txtTenLoaiSP = viewGroupCha.findViewById(R.id.txtTenLoaiSP);
+            viewHolderMenu.hinhMenu = viewGroupCha.findViewById(R.id.imgMenuPlus);
+
+            viewGroupCha.setTag(viewHolderMenu);
+
+        } else {
+            viewHolderMenu = (ViewHolderMenu) viewGroupCha.getTag();
+        }
+
+
+        viewHolderMenu.txtTenLoaiSP.setText(loaiSanPhams.get(vitriGroupCha).getTENLOAISP());
         int demsanphamcon = loaiSanPhams.get(vitriGroupCha).getListCon().size();
-        imageView.setVisibility(demsanphamcon > 0 ? View.VISIBLE : View.INVISIBLE);
-        imageView.setImageResource(isExpanded ? R.drawable.ic_remove_black_24dp : R.drawable.ic_add_black_24dp);
+        viewHolderMenu.hinhMenu.setVisibility(demsanphamcon > 0 ? View.VISIBLE : View.INVISIBLE);
+        viewHolderMenu.hinhMenu.setImageResource(isExpanded ? R.drawable.ic_remove_black_24dp : R.drawable.ic_add_black_24dp);
         viewGroupCha.setBackgroundResource(isExpanded ? R.color.colorGray : R.color.colorWhite);
         viewGroupCha.setOnTouchListener(new View.OnTouchListener() {
             @Override
