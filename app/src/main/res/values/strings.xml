@@ -2,4 +2,7 @@
     <string name="app_name">AppLazada</string>
     <string name="open">Mở</string>
     <string name="close">Đóng</string>
+    <string name="facebook_app_id">679785572834418</string>
+    <string name="fb_login_protocol_scheme">fb679785572834418</string>
+
 </resources>

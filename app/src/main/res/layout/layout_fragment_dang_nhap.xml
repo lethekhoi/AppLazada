@@ -12,6 +12,7 @@
         android:layout_margin="10dp">
 
         <com.example.applazada.CustomView.ClearEditText
+            android:id="@+id/edtDiaChiEmailDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Địa chỉ Email"
@@ -24,6 +25,7 @@
         android:layout_margin="10dp">
 
         <com.example.applazada.CustomView.PasswordEditText
+            android:id="@+id/edtPasswordlDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
@@ -33,7 +35,7 @@
 
 
     <TextView
-        android:id="@+id/txtQuenMatKhau"
+        android:id="@+id/txtQuenMatKhauDangNhap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -65,6 +67,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnDangNhapFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -75,6 +78,7 @@
             android:textColor="@color/colorFacebook" />
 
         <Button
+            android:id="@+id/btnDangNhapGoogle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
