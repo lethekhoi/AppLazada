@@ -1,7 +1,13 @@
 package com.example.applazada.Model.TrangChu.XuLyMenu;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import com.example.applazada.ConnectInternet.DownloadJSON;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +19,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class XuLyJSONMenu {
+    String TenNguoiDung = "";
+
     public List<LoaiSanPham> ParserJSONMenu(String dulieujson) {
         List<LoaiSanPham> loaiSanPhamList = new ArrayList<>();
 
@@ -66,6 +74,9 @@ public class XuLyJSONMenu {
         return loaiSanPhamList;
 
     }
+
+
+
 
 
 }

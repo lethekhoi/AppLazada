@@ -27,7 +27,15 @@ import com.example.applazada.Model.TrangChu.DownloadDuLieu;
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
 import com.example.applazada.View.DangNhap.DangNhapActivity;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,10 +59,15 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     ExpandableListView expandableListView;
+    PresenterLogicXuLyMenu logicXuLyMenu;
+    String TenNguoiDung = "";
+    AccessToken accessToken;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_trang_chu);
 
         drawerLayout = findViewById(R.id.drawerlayouttrangchu);
@@ -80,9 +93,10 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        PresenterLogicXuLyMenu logicXuLyMenu = new PresenterLogicXuLyMenu(this);
-        logicXuLyMenu.LayDanhSachMenu();
+        logicXuLyMenu = new PresenterLogicXuLyMenu(this);
 
+        logicXuLyMenu.LayDanhSachMenu();
+        logicXuLyMenu.LayTenNguoiDungFacebook();
 
         btnlaydulieu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +127,38 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
+        this.menu = menu;
+        accessToken = logicXuLyMenu.LayTenNguoiDungFacebook();
+
+        if (accessToken != null) {
+            GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject object, GraphResponse response) {
+                    try {
+
+                        TenNguoiDung = object.getString("name");
+                        MenuItem menuItem = menu.findItem(R.id.itDangNhap);
+                        menuItem.setTitle(TenNguoiDung);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Bundle parameter = new Bundle();
+            parameter.putString("fields", "name");
+            graphRequest.setParameters(parameter);
+            graphRequest.executeAsync();
+        }
+
+        if (accessToken != null) {
+            MenuItem menuItDangXuat = menu.findItem(R.id.itDangXuat);
+            menuItDangXuat.setVisible(true);
+
+        }
+
         return true;
     }
 
@@ -128,9 +172,20 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
 
         int id = item.getItemId();
         switch (id) {
+
             case R.id.itDangNhap:
-                Intent itDangNhap = new Intent(this, DangNhapActivity.class);
-                startActivity(itDangNhap);
+                if (accessToken == null) {
+                    Intent itDangNhap = new Intent(this, DangNhapActivity.class);
+                    startActivity(itDangNhap);
+                }
+                ;
+                break;
+            case R.id.itDangXuat:
+                if (accessToken != null) {
+                    LoginManager.getInstance().logOut();
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
         }
         return true;
     }

@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.applazada.R;
+import com.example.applazada.View.TrangChu.TrangChuActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -43,17 +44,18 @@ public class FragmentDangNhap extends Fragment {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d("Kiemtra", "Thành công");
+                Intent iTrangChu = new Intent(getActivity(), TrangChuActivity.class);
+                startActivity(iTrangChu);
+
             }
 
             @Override
             public void onCancel() {
-                Log.d("Kiemtra", "Thoát");
+
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d("Kiemtra", "lỗi");
 
             }
         });
@@ -61,7 +63,7 @@ public class FragmentDangNhap extends Fragment {
         btnDangNhapFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.getInstance().logInWithReadPermissions(FragmentDangNhap.this,Arrays.asList("public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(FragmentDangNhap.this, Arrays.asList("public_profile", "email"));
             }
         });
         return view;
