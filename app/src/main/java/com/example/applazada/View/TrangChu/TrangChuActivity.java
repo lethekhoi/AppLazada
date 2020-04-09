@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
+import com.example.applazada.Model.DangNhap.ModelDangNhap;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
 import com.example.applazada.Model.TrangChu.DownloadDuLieu;
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
@@ -32,6 +33,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
@@ -50,7 +55,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu {
+public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener {
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;
@@ -63,6 +68,10 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
     String TenNguoiDung = "";
     AccessToken accessToken;
     Menu menu;
+    ModelDangNhap modelDangNhap;
+    MenuItem itemDangNhap, menuItDangXuat;
+    GoogleApiClient mGoogleApiClient;
+    GoogleSignInResult googleSignInResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,9 +103,13 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
         tabLayout.setupWithViewPager(viewPager);
 
         logicXuLyMenu = new PresenterLogicXuLyMenu(this);
+        modelDangNhap = new ModelDangNhap();
+
 
         logicXuLyMenu.LayDanhSachMenu();
         logicXuLyMenu.LayTenNguoiDungFacebook();
+
+        mGoogleApiClient = modelDangNhap.LayGoogleApiClient(this, this);
 
         btnlaydulieu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +143,10 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
         this.menu = menu;
+        itemDangNhap = menu.findItem(R.id.itDangNhap);
+        menuItDangXuat = menu.findItem(R.id.itDangXuat);
         accessToken = logicXuLyMenu.LayTenNguoiDungFacebook();
+        googleSignInResult = modelDangNhap.LayThongTinDangNhapGoogle(mGoogleApiClient);
 
         if (accessToken != null) {
             GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
@@ -139,8 +155,8 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
                     try {
 
                         TenNguoiDung = object.getString("name");
-                        MenuItem menuItem = menu.findItem(R.id.itDangNhap);
-                        menuItem.setTitle(TenNguoiDung);
+
+                        itemDangNhap.setTitle(TenNguoiDung);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -153,8 +169,14 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
             graphRequest.executeAsync();
         }
 
-        if (accessToken != null) {
-            MenuItem menuItDangXuat = menu.findItem(R.id.itDangXuat);
+
+        if (googleSignInResult != null) {
+            itemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
+        }
+
+
+        if (accessToken != null || googleSignInResult != null) {
+
             menuItDangXuat.setVisible(true);
 
         }
@@ -174,7 +196,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
         switch (id) {
 
             case R.id.itDangNhap:
-                if (accessToken == null) {
+                if (accessToken == null && googleSignInResult == null) {
                     Intent itDangNhap = new Intent(this, DangNhapActivity.class);
                     startActivity(itDangNhap);
                 }
@@ -186,6 +208,13 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
                 }
+                if (googleSignInResult != null) {
+                    Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
+
+
         }
         return true;
     }
@@ -197,5 +226,10 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu 
         ExpandAdapter expandAdapter = new ExpandAdapter(this, loaiSanPhamList);
         expandableListView.setAdapter(expandAdapter);
         expandAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
