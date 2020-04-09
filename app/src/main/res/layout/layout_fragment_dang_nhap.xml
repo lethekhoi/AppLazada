@@ -25,7 +25,7 @@
         android:layout_margin="10dp">
 
         <com.example.applazada.CustomView.PasswordEditText
-            android:id="@+id/edtPasswordlDangNhap"
+            android:id="@+id/edtPasswordDangNhap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mật khẩu"
