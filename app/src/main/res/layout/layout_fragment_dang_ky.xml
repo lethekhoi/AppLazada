@@ -29,6 +29,7 @@
             android:layout_margin="10dp">
 
             <EditText
+                android:textColor="@color/colorBlack"
                 android:id="@+id/edtHoTenDangKy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
             android:layout_margin="10dp">
 
             <EditText
+                android:textColor="@color/colorBlack"
                 android:id="@+id/edtEmailDangKy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Mật khẩu"
                 android:textColor="@color/colorBlack"
+                app:useValidate="true"
                 app:useStrike="true" />
         </com.google.android.material.textfield.TextInputLayout>
 

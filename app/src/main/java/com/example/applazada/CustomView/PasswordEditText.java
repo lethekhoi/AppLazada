@@ -6,27 +6,35 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.core.content.ContextCompat;
 
 import com.example.applazada.R;
+import com.google.android.material.textfield.TextInputLayout;
+
 
 @SuppressLint("AppCompatCustomView")
 public class PasswordEditText extends EditText {
+
     Drawable eye, eyeStrike;
     Boolean visible = false;
     Boolean useStrike = false;
     Drawable drawable1;
+    Boolean useValidate = false;
     int ALPHA = (int) (255 * .55f);
 
     public PasswordEditText(Context context) {
         super(context);
+
         khoitao(null);
     }
 
     public PasswordEditText(Context context, AttributeSet attrs) {
+
         super(context, attrs);
         khoitao(attrs);
     }
@@ -42,10 +50,14 @@ public class PasswordEditText extends EditText {
     }
 
     private void khoitao(AttributeSet attrs) {
+
+
         if (attrs != null) {
             TypedArray array = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.PasswordEditText, 0, 0);
             this.useStrike = array.getBoolean(R.styleable.PasswordEditText_useStrike, false);
+            this.useValidate = array.getBoolean(R.styleable.PasswordEditText_useValidate, false);
         }
+
         eye = ContextCompat.getDrawable(getContext(), R.drawable.ic_visibility_black_24dp);
         eyeStrike = ContextCompat.getDrawable(getContext(), R.drawable.ic_visibility_off_black_24dp);
 
