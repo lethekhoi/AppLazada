@@ -29,8 +29,8 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name=".View.TrangChu.TrangChuActivity"
-            android:label="Đăng nhập/Đăng ký"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
     </application>

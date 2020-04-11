@@ -41,7 +41,6 @@ public class ViewPagerAdapterDangNhap extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-
                 return "Đăng Nhập";
             case 1:
                 return "Đăng Ký";

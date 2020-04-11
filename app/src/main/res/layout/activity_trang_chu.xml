@@ -2,59 +2,68 @@
 
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerlayouttrangchu"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/contentTrangChu"
+        android:id="@+id/themFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".View.TrangChu.TrangChuActivity">
+            android:fitsSystemWindows="true">
 
             <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar"
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-                android:background="@color/bgToolbar">
+                android:background="@color/bgToolbar"
+                android:fitsSystemWindows="true">
 
 
-                <LinearLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/collapsing_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                    android:layout_height="130dp"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbarTrangChu"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:theme="@style/menuitemcolor"
-                        app:logo="@drawable/logo" />
+                        app:layout_collapseMode="pin"
+                        app:layout_scrollFlags="scroll|enterAlways"
+                        app:logo="@drawable/logo"
+                        app:theme="@style/menuitemcolor"
+
+                        />
 
                     <LinearLayout
+                        android:id="@+id/lnSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginRight="10dp"
+
                         android:background="@drawable/bgsearch"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        app:layout_collapseMode="parallax"
+                        app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap">
 
                         <Button
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:layout_weight="1"
-                            android:background="@drawable/selector_bg_search"
+                            android:background="@drawable/bgsearch"
                             android:drawableLeft="@drawable/ic_search_black_24dp"
                             android:paddingLeft="10dp"
-                            android:text="Tìm Kiếm Trên Lazada"
-                            android:textAlignment="textStart"
+                            android:text="Tìm kiếm trên Lazada"
+                            android:textAlignment="viewStart"
                             android:textAllCaps="false"
                             android:textColor="@color/colorGray" />
 
@@ -70,67 +79,65 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_margin="10dp"
-                            android:background="@drawable/selector_bg_search"
-                            android:padding="10dp"
+                            android:background="@drawable/bgsearch"
                             android:src="@drawable/ic_photo_camera_black_24dp" />
 
                     </LinearLayout>
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:tabMode="scrollable"
-                        app:tabTextAppearance="@style/capfalse"
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                        app:tabTextColor="@color/colorGray">
-
-                    </com.google.android.material.tabs.TabLayout>
-                </LinearLayout>
-
-                <LinearLayout
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/edtMaLoaiCha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:hint="Mã Loại cha" />
-
-                    <Button
-                        android:id="@+id/btnlaydulieu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lấy dữ liệu" />
-
-                </LinearLayout>
+                    app:tabMode="scrollable"
+                    app:tabTextAppearance="@style/capfalse"
+                    app:tabTextColor="@color/colorGray" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager"
+            <FrameLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            </androidx.viewpager.widget.ViewPager>
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></androidx.viewpager.widget.ViewPager>
+            </FrameLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        </LinearLayout>
     </FrameLayout>
+
 
     <ExpandableListView
         android:id="@+id/epMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:layout_marginTop="20dp"
         android:background="@color/colorWhite"
-        android:choiceMode="singleChoice"
+        android:choiceMode="multipleChoice"
         android:groupIndicator="@null">
 
     </ExpandableListView>
 
+
 </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+
+
+
+
+
+
+
+
+
 

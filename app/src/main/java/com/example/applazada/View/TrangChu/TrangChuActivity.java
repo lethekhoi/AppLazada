@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.applazada.Adapter.ExpandAdapter;
@@ -37,6 +39,8 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
@@ -55,12 +59,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener {
+public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener {
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;
-    EditText editTextMaloaicha;
-    Button btnlaydulieu;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    AppBarLayout appBarLayout;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     ExpandableListView expandableListView;
@@ -80,12 +84,12 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         setContentView(R.layout.activity_trang_chu);
 
         drawerLayout = findViewById(R.id.drawerlayouttrangchu);
-        editTextMaloaicha = findViewById(R.id.edtMaLoaiCha);
-        btnlaydulieu = findViewById(R.id.btnlaydulieu);
+
         viewPager = findViewById(R.id.viewpager);
         expandableListView = findViewById(R.id.epMenu);
 
-
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+        appBarLayout = findViewById(R.id.appbar);
         toolbar = findViewById(R.id.toolbarTrangChu);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -110,30 +114,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         logicXuLyMenu.LayTenNguoiDungFacebook();
 
         mGoogleApiClient = modelDangNhap.LayGoogleApiClient(this, this);
-
-        btnlaydulieu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String maloaicha = editTextMaloaicha.getText().toString();
-                //diachi genymotion 10.0.3.2
-                //dia chi may ao android studio 127.0.0.1
-                //đường dẫn dạng GET
-                //String duongdan = "http://10.0.3.2/weblazada/loaisanpham.php?maloaicha=" + maloaicha;
-                //đường dẫn dạng POST
-                String duongdan = "http://10.0.3.2/weblazada/loaisanpham.php";
-                DownloadDuLieu downloadDuLieu = new DownloadDuLieu();
-                downloadDuLieu.execute(duongdan, maloaicha);
-                try {
-                    String dulieu = downloadDuLieu.get();
-                    Toast.makeText(TrangChuActivity.this, dulieu, Toast.LENGTH_SHORT).show();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        appBarLayout.addOnOffsetChangedListener(this);
 
 
     }
@@ -231,5 +212,18 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+        if (collapsingToolbarLayout.getHeight() + verticalOffset <= (1.5* ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
+            LinearLayout linearLayout = appBarLayout.findViewById(R.id.lnSearch);
+            linearLayout.animate().alpha(0).setDuration(200);
+
+        } else {
+            LinearLayout linearLayout = appBarLayout.findViewById(R.id.lnSearch);
+            linearLayout.animate().alpha(1).setDuration(200);
+        }
     }
 }

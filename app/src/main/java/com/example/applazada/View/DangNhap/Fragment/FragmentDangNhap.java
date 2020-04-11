@@ -124,6 +124,6 @@ public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConn
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        progressDialog.cancel();
+
     }
 }
