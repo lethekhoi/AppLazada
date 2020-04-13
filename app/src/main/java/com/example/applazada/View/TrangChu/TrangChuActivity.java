@@ -9,27 +9,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
-import com.example.applazada.Model.DangNhap.ModelDangNhap;
+import com.example.applazada.Model.DangNhap_DangKy.ModelDangNhap;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
-import com.example.applazada.Model.TrangChu.DownloadDuLieu;
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
-import com.example.applazada.View.DangNhap.DangNhapActivity;
+import com.example.applazada.View.DangNhap_DangKy.DangNhapActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -46,20 +39,10 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener {
+    public  static  final String SERVER_NAME="http://10.0.3.2//weblazada/loaisanpham.php";
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;

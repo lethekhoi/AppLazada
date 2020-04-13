@@ -17,7 +17,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".View.DangNhap.DangNhapActivity"></activity>
+        <activity android:name=".View.DangNhap_DangKy.DangNhapActivity"></activity>
         <activity
             android:name=".View.ManHinhChao.ManHinhChaoActivity"
             android:screenOrientation="portrait"

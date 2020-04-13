@@ -1,13 +1,8 @@
-package com.example.applazada.View.DangNhap.Fragment;
+package com.example.applazada.View.DangNhap_DangKy.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.applazada.Model.DangNhap.ModelDangNhap;
+import com.example.applazada.Model.DangNhap_DangKy.ModelDangNhap;
 import com.example.applazada.R;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
 import com.facebook.CallbackManager;
@@ -27,14 +22,11 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConnectionFailedListener {

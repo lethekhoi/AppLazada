@@ -1,20 +1,12 @@
 package com.example.applazada.Presenter.TrangChu;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-
 import com.example.applazada.ConnectInternet.DownloadJSON;
-import com.example.applazada.Model.DangNhap.ModelDangNhap;
+import com.example.applazada.Model.DangNhap_DangKy.ModelDangNhap;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
 import com.example.applazada.Model.TrangChu.XuLyMenu.XuLyJSONMenu;
+import com.example.applazada.View.TrangChu.TrangChuActivity;
 import com.example.applazada.View.TrangChu.ViewXuLyMenu;
 import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,10 +31,19 @@ public class PresenterLogicXuLyMenu implements IPresenterXuLyMenu {
 //        DownloadJSON downloadJSON = new DownloadJSON(duongdan);
         //end phương thức get
         //lấy bằng POST
-        String duongdan = "http://10.0.3.2/weblazada/loaisanpham.php";
+        String duongdan = TrangChuActivity.SERVER_NAME;
+
+        HashMap<String, String> hsHam = new HashMap<>();
+        hsHam.put("ham", "LayDanhSachMenu");
+
         HashMap<String, String> hsMaLoaiCha = new HashMap<>();
         hsMaLoaiCha.put("maloaicha", "0");
+
+        attrs.add(hsHam);
         attrs.add(hsMaLoaiCha);
+
+
+
         DownloadJSON downloadJSON = new DownloadJSON(duongdan, attrs);
         //end phương thức post
 
@@ -65,7 +66,6 @@ public class PresenterLogicXuLyMenu implements IPresenterXuLyMenu {
     public AccessToken LayTenNguoiDungFacebook() {
         ModelDangNhap modelDangNhap = new ModelDangNhap();
         AccessToken accessToken = modelDangNhap.LayTokenFacebookHienTai();
-
 
 
         return accessToken;

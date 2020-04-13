@@ -1,4 +1,4 @@
-package com.example.applazada.Model.DangNhap;
+package com.example.applazada.Model.DangNhap_DangKy;
 
 import android.content.Context;
 
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
-import com.facebook.FacebookSdk;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;

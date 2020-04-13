@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.applazada.ConnectInternet.DownloadJSON;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
+import com.example.applazada.View.TrangChu.TrangChuActivity;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -52,11 +53,18 @@ public class XuLyJSONMenu {
         List<LoaiSanPham> loaiSanPhamList = new ArrayList<>();
         List<HashMap<String, String>> attrs = new ArrayList<>();
         //lấy bằng POST
-        String duongdan = "http://10.0.3.2/weblazada/loaisanpham.php";
+        String duongdan = TrangChuActivity.SERVER_NAME;
+
+
+        HashMap<String, String> hsHam = new HashMap<>();
+        hsHam.put("ham", "LayDanhSachMenu");
+
         HashMap<String, String> hsMaLoaiCha = new HashMap<>();
         hsMaLoaiCha.put("maloaicha", String.valueOf(maloaisp));
-
+        attrs.add(hsHam);
         attrs.add(hsMaLoaiCha);
+
+
         DownloadJSON downloadJSON = new DownloadJSON(duongdan, attrs);
         //end phương thức post
 
@@ -74,9 +82,6 @@ public class XuLyJSONMenu {
         return loaiSanPhamList;
 
     }
-
-
-
 
 
 }

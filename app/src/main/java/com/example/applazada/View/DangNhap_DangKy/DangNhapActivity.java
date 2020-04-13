@@ -1,4 +1,4 @@
-package com.example.applazada.View.DangNhap;
+package com.example.applazada.View.DangNhap_DangKy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
