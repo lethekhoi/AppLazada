@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +32,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.Arrays;
 
 public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
-    Button btnDangNhapFacebook, btnDangNhapGoogle;
+    ModelDangNhap modelDangNhap;
+    EditText edTenDangNhap, edMatKhau;
+    Button btnDangNhapFacebook, btnDangNhapGoogle, btnDangNhap;
     CallbackManager callbackManager;
     GoogleApiClient mGoogleApiCLient;
     public static int SIGN_IN_GOOGLE = 111;
@@ -43,7 +47,7 @@ public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConn
 
         View view = inflater.inflate(R.layout.layout_fragment_dang_nhap, container, false);
 
-        ModelDangNhap modelDangNhap = new ModelDangNhap();
+        modelDangNhap = new ModelDangNhap();
         mGoogleApiCLient = modelDangNhap.LayGoogleApiClient(getContext(), (GoogleApiClient.OnConnectionFailedListener) this);
 
         FacebookSdk.sdkInitialize(getContext().getApplicationContext());
@@ -67,8 +71,13 @@ public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConn
             }
         });
 
+
+        btnDangNhap = view.findViewById(R.id.btnDangNhap);
         btnDangNhapFacebook = view.findViewById(R.id.btnDangNhapFacebook);
         btnDangNhapGoogle = view.findViewById(R.id.btnDangNhapGoogle);
+        edTenDangNhap = view.findViewById(R.id.edtDiaChiEmailDangNhap);
+        edMatKhau = view.findViewById(R.id.edtPasswordDangNhap);
+
         btnDangNhapGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +90,22 @@ public class FragmentDangNhap extends Fragment implements GoogleApiClient.OnConn
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().logInWithReadPermissions(FragmentDangNhap.this, Arrays.asList("public_profile", "email"));
+            }
+        });
+
+        btnDangNhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tendangnhap = edTenDangNhap.getText().toString();
+                String matkhau = edMatKhau.getText().toString();
+                boolean kiemtra = modelDangNhap.KiemTraDangNhap(getActivity(), tendangnhap, matkhau);
+                if (kiemtra) {
+                    Intent iTrangChu = new Intent(getActivity(), TrangChuActivity.class);
+                    startActivity(iTrangChu);
+                } else {
+                    Toast.makeText(getActivity(), "Tên đăng nhập và mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         return view;

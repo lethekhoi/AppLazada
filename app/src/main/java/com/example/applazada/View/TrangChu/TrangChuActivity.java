@@ -42,7 +42,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener {
-    public  static  final String SERVER_NAME="http://10.0.3.2//weblazada/loaisanpham.php";
+    public static final String SERVER_NAME = "http://10.0.3.2//weblazada/loaisanpham.php";
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;
@@ -138,8 +138,14 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
             itemDangNhap.setTitle(googleSignInResult.getSignInAccount().getDisplayName());
         }
 
+        String tennv = modelDangNhap.LayCachedDangNhap(this);
+        if (!tennv.equals("")) {
+            itemDangNhap.setTitle(tennv);
 
-        if (accessToken != null || googleSignInResult != null) {
+        }
+
+
+        if (accessToken != null || googleSignInResult != null || !tennv.equals("")) {
 
             menuItDangXuat.setVisible(true);
 
@@ -160,7 +166,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         switch (id) {
 
             case R.id.itDangNhap:
-                if (accessToken == null && googleSignInResult == null) {
+                if (accessToken == null && googleSignInResult == null && modelDangNhap.LayCachedDangNhap(this).equals("")) {
                     Intent itDangNhap = new Intent(this, DangNhapActivity.class);
                     startActivity(itDangNhap);
                 }
@@ -171,9 +177,16 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
                     LoginManager.getInstance().logOut();
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
+
                 }
                 if (googleSignInResult != null) {
                     Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                    this.menu.clear();
+                    this.onCreateOptionsMenu(menu);
+                }
+
+                if (!modelDangNhap.LayCachedDangNhap(this).equals("")) {
+                    modelDangNhap.CapNhatCachedDangNhap(this, "");
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
                 }
@@ -200,7 +213,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
-        if (collapsingToolbarLayout.getHeight() + verticalOffset <= (1.5* ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
+        if (collapsingToolbarLayout.getHeight() + verticalOffset <= (1.5 * ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
             LinearLayout linearLayout = appBarLayout.findViewById(R.id.lnSearch);
             linearLayout.animate().alpha(0).setDuration(200);
 
