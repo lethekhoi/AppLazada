@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGray"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imgKhuyenMaiDienTu"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/backgroundplashscreen" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Các Thương Hiệu Lớn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recyclerThuongHieuLon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Top Điện Thoại và Máy Tính Bảng" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTopDienThoaiMayTinhBang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
