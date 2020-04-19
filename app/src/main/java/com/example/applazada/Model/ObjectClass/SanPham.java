@@ -5,6 +5,15 @@ public class SanPham {
     String ANHLON;
     String THONGTIN;
     String ANHNHO;
+    String TENSP;
+
+    public String getTENSP() {
+        return TENSP;
+    }
+
+    public void setTENSP(String TENSP) {
+        this.TENSP = TENSP;
+    }
 
     public int getMASP() {
         return MASP;
@@ -85,7 +94,6 @@ public class SanPham {
     public void setTHONGTIN(String THONGTIN) {
         this.THONGTIN = THONGTIN;
     }
-
 
 
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applazada.Adapter.AdapterDienTu;
 import com.example.applazada.Model.ObjectClass.DienTu;
+import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Model.ObjectClass.ThuongHieu;
 import com.example.applazada.Presenter.TrangChu_DienTu.PresenterLogicDienTu;
 import com.example.applazada.R;
@@ -40,10 +41,11 @@ public class FragmentDienTu extends Fragment implements ViewDienTu {
     }
 
     @Override
-    public void HienThiDanhSach(List<ThuongHieu> thuongHieus) {
+    public void HienThiDanhSach(List<ThuongHieu> thuongHieus, List<SanPham> sanPhams) {
 
         DienTu dienTu = new DienTu();
         dienTu.setThuongHieus(thuongHieus);
+        dienTu.setSanPhams(sanPhams);
         dienTuList.add(dienTu);
 
 

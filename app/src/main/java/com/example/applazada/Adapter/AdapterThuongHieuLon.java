@@ -58,7 +58,7 @@ public class AdapterThuongHieuLon extends RecyclerView.Adapter<AdapterThuongHieu
         ThuongHieu thuongHieu = thuongHieus.get(position);
         holder.txtTieuDeThuongHieu.setText(thuongHieu.getTENTHUONGHIEU());
 
-        Picasso.with(context).load(thuongHieu.getHINHTHUONGHIEU()).resize(150, 150).into(holder.imgHinhThuongHieu, new Callback() {
+        Picasso.with(context).load(thuongHieu.getHINHTHUONGHIEU()).resize(120, 140).into(holder.imgHinhThuongHieu, new Callback() {
             @Override
             public void onSuccess() {
                 holder.progressBar.setVisibility(View.GONE);

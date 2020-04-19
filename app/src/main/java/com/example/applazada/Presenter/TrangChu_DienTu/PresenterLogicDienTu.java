@@ -2,6 +2,7 @@ package com.example.applazada.Presenter.TrangChu_DienTu;
 
 import android.view.View;
 
+import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Model.ObjectClass.ThuongHieu;
 import com.example.applazada.Model.TrangChu_DienTu.ModelDienTu;
 import com.example.applazada.View.TrangChu.ViewDienTu;
@@ -22,8 +23,9 @@ public class PresenterLogicDienTu implements IPresenterDienTu {
     @Override
     public void LayDanhSachDienTu() {
         List<ThuongHieu> thuongHieuList = modelDienTu.LayDanhSachThuongHieuLon();
-        if (thuongHieuList.size() > 0) {
-            viewDienTu.HienThiDanhSach(thuongHieuList);
+        List<SanPham> sanPhamList = modelDienTu.LayDanhSachSanPhamTop();
+        if (thuongHieuList.size() > 0 && sanPhamList.size() > 0) {
+            viewDienTu.HienThiDanhSach(thuongHieuList, sanPhamList);
         }
     }
 }

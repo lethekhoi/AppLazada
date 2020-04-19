@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray"
@@ -17,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Các Thương Hiệu Lớn" />
+        android:text="CÁC THƯƠNG HIỆU LỚN" />
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -32,9 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Top Điện Thoại và Máy Tính Bảng" />
+        android:text="TOP ĐIỆN THOẠI VÀ MÁY TÍNH BẢNG" />
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/recyclerTopDienThoaiMayTinhBang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applazada.Model.ObjectClass.DienTu;
@@ -47,11 +48,20 @@ public class AdapterDienTu extends RecyclerView.Adapter<AdapterDienTu.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DienTu dienTu = dienTuList.get(position);
+        //xử lí hiển thị thương hieu lớn
         AdapterThuongHieuLon adapterThuongHieuLon = new AdapterThuongHieuLon(context, dienTu.getThuongHieus());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 3, GridLayoutManager.HORIZONTAL, false);
         holder.recyclerViewThuongHieuLon.setLayoutManager(layoutManager);
         holder.recyclerViewThuongHieuLon.setAdapter(adapterThuongHieuLon);
         adapterThuongHieuLon.notifyDataSetChanged();
+
+        //xử lí hiển thị top sản phẩm
+        AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(context, dienTu.getSanPhams());
+        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
+        holder.recyclerViewTopSanPham.setLayoutManager(layoutManager1);
+        holder.recyclerViewTopSanPham.setAdapter(adapterTopDienThoaiDienTu);
+
+
     }
 
     @Override
