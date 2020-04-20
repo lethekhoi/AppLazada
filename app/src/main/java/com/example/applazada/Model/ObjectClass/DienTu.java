@@ -8,6 +8,23 @@ public class DienTu {
     List<ThuongHieu> thuongHieus;
     List<SanPham> sanPhams;
     String HinhSanPham;
+    String tennoibat, tentopnoibat;
+
+    public String getTennoibat() {
+        return tennoibat;
+    }
+
+    public void setTennoibat(String tennoibat) {
+        this.tennoibat = tennoibat;
+    }
+
+    public String getTentopnoibat() {
+        return tentopnoibat;
+    }
+
+    public void setTentopnoibat(String tentopnoibat) {
+        this.tentopnoibat = tentopnoibat;
+    }
 
     public String getHinhSanPham() {
         return HinhSanPham;

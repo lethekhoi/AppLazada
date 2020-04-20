@@ -30,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:text="OPPO" />
+                android:text="OPPO"
+                android:textAlignment="center" />
 
             <ImageView
                 android:id="@+id/imgHinhThuongHieuLonDienTu"

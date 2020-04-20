@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ModelDienTu {
 
-    public List<SanPham> LayDanhSachSanPhamTop() {
+    public List<SanPham> LayDanhSachSanPhamTop(String tenham, String tenmang) {
 
         String dataJSON = "";
         List<SanPham> sanPhamList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class ModelDienTu {
 
 
         HashMap<String, String> hsHam = new HashMap<>();
-        hsHam.put("ham", "LayDanhSachTopDienThoaiVaMayTinhBang");
+        hsHam.put("ham", tenham);
 
 
         attrs.add(hsHam);
@@ -39,11 +39,12 @@ public class ModelDienTu {
         try {
             dataJSON = downloadJSON.get();
             JSONObject jsonObject = new JSONObject(dataJSON);
-            JSONArray jsonArrayDanhSachSanPham = jsonObject.getJSONArray("TOPDIENTHOAI&MAYTINHBANG");
+            JSONArray jsonArrayDanhSachSanPham = jsonObject.getJSONArray(tenmang);
             int dem = jsonArrayDanhSachSanPham.length();
             for (int i = 0; i < dem; i++) {
                 SanPham sanPham = new SanPham();
                 JSONObject object = jsonArrayDanhSachSanPham.getJSONObject(i);
+                sanPham.setMASP(object.getInt("MASP"));
                 sanPham.setTENSP(object.getString("TENSP"));
                 sanPham.setGIA(object.getInt("GIATIEN"));
                 sanPham.setANHLON(object.getString("HINHSANPHAM"));
@@ -68,7 +69,7 @@ public class ModelDienTu {
     }
 
 
-    public List<ThuongHieu> LayDanhSachThuongHieuLon() {
+    public List<ThuongHieu> LayDanhSachThuongHieuLon(String tenham, String tenmang) {
         String dataJSON = "";
         List<ThuongHieu> thuongHieuList = new ArrayList<>();
         List<HashMap<String, String>> attrs = new ArrayList<>();
@@ -77,7 +78,7 @@ public class ModelDienTu {
 
 
         HashMap<String, String> hsHam = new HashMap<>();
-        hsHam.put("ham", "LayDanhSachCacThuongHieuLon");
+        hsHam.put("ham", tenham);
 
 
         attrs.add(hsHam);
@@ -89,7 +90,7 @@ public class ModelDienTu {
         try {
             dataJSON = downloadJSON.get();
             JSONObject jsonObject = new JSONObject(dataJSON);
-            JSONArray jsonArrayDanhSachThuongHieu = jsonObject.getJSONArray("DANHSACHTHUONGHIEU");
+            JSONArray jsonArrayDanhSachThuongHieu = jsonObject.getJSONArray(tenmang);
             int dem = jsonArrayDanhSachThuongHieu.length();
             for (int i = 0; i < dem; i++) {
                 ThuongHieu thuongHieu = new ThuongHieu();

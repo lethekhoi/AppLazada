@@ -2,11 +2,13 @@ package com.example.applazada.Presenter.TrangChu_DienTu;
 
 import android.view.View;
 
+import com.example.applazada.Model.ObjectClass.DienTu;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Model.ObjectClass.ThuongHieu;
 import com.example.applazada.Model.TrangChu_DienTu.ModelDienTu;
 import com.example.applazada.View.TrangChu.ViewDienTu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PresenterLogicDienTu implements IPresenterDienTu {
@@ -22,10 +24,45 @@ public class PresenterLogicDienTu implements IPresenterDienTu {
 
     @Override
     public void LayDanhSachDienTu() {
-        List<ThuongHieu> thuongHieuList = modelDienTu.LayDanhSachThuongHieuLon();
-        List<SanPham> sanPhamList = modelDienTu.LayDanhSachSanPhamTop();
+        List<DienTu> dienTuList = new ArrayList<>();
+
+        List<ThuongHieu> thuongHieuList = modelDienTu.LayDanhSachThuongHieuLon("LayDanhSachCacThuongHieuLon", "DANHSACHTHUONGHIEU");
+        List<SanPham> sanPhamList = modelDienTu.LayDanhSachSanPhamTop("LayDanhSachTopDienThoaiVaMayTinhBang", "TOPDIENTHOAI&MAYTINHBANG");
+
+
+        DienTu dienTu = new DienTu();
+        dienTu.setThuongHieus(thuongHieuList);
+        dienTu.setSanPhams(sanPhamList);
+        dienTu.setTennoibat("Thương hiệu lớn");
+        dienTu.setTentopnoibat("Top điện thoại và máy tính bảng");
+        dienTuList.add(dienTu);
+
+        List<ThuongHieu> topphukienList = modelDienTu.LayDanhSachThuongHieuLon("LayDanhSachPhuKien", "DANHSACHPHUKIEN");
+        List<SanPham> phukienList = modelDienTu.LayDanhSachSanPhamTop("LayDanhSachTopPhuKien", "TOPPHUKIEN");
+
+
+        DienTu dienTu1 = new DienTu();
+        dienTu1.setThuongHieus(topphukienList);
+        dienTu1.setSanPhams(phukienList);
+        dienTu1.setTennoibat("Phụ Kiện");
+        dienTu1.setTentopnoibat("Top Phụ kiện");
+        dienTuList.add(dienTu1);
+
+
+        List<ThuongHieu> toptienichList = modelDienTu.LayDanhSachThuongHieuLon("LayTopTienIch", "TOPTIENICH");
+        List<SanPham> tienichList = modelDienTu.LayDanhSachSanPhamTop("LayDanhSachTienIch", "DANHSACHTIENICH");
+
+
+        DienTu dienTu2 = new DienTu();
+        dienTu2.setThuongHieus(toptienichList);
+        dienTu2.setSanPhams(tienichList);
+        dienTu2.setTennoibat("Tiện ích");
+        dienTu2.setTentopnoibat("Top Video & Tivi");
+        dienTuList.add(dienTu2);
+
+
         if (thuongHieuList.size() > 0 && sanPhamList.size() > 0) {
-            viewDienTu.HienThiDanhSach(thuongHieuList, sanPhamList);
+            viewDienTu.HienThiDanhSach(dienTuList);
         }
     }
 }

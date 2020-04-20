@@ -41,12 +41,9 @@ public class FragmentDienTu extends Fragment implements ViewDienTu {
     }
 
     @Override
-    public void HienThiDanhSach(List<ThuongHieu> thuongHieus, List<SanPham> sanPhams) {
+    public void HienThiDanhSach(List<DienTu> dienTus) {
 
-        DienTu dienTu = new DienTu();
-        dienTu.setThuongHieus(thuongHieus);
-        dienTu.setSanPhams(sanPhams);
-        dienTuList.add(dienTu);
+        dienTuList = dienTus;
 
 
         AdapterDienTu adapterDienTu = new AdapterDienTu(getContext(), dienTuList);
