@@ -65,4 +65,24 @@ public class PresenterLogicDienTu implements IPresenterDienTu {
             viewDienTu.HienThiDanhSach(dienTuList);
         }
     }
+
+    @Override
+    public void LayDanhSachLogoThuongHieu() {
+        List<ThuongHieu> thuongHieuList = modelDienTu.LayDanhSachThuongHieuLon("LayLogoThuongHieuLon", "DANHSACHTHUONGHIEU");
+        if (thuongHieuList.size() > 0) {
+            viewDienTu.HienThiLogoThuongHieu(thuongHieuList);
+        } else {
+            viewDienTu.LoiLayDuLieu();
+        }
+    }
+
+    @Override
+    public void LayDanhSachSanPhamMoi() {
+        List<SanPham> sanPhamList = modelDienTu.LayDanhSachSanPhamTop("LayDanhSachSanPhamMoi", "DANHSACHSANPHAMMOIVE");
+        if (sanPhamList.size() > 0) {
+            viewDienTu.HienThiSanPhamMoiVe(sanPhamList);
+        } else {
+            viewDienTu.LoiLayDuLieu();
+        }
+    }
 }

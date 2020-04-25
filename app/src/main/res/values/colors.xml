@@ -11,4 +11,5 @@
     <color name="colorGoogle">#da4835</color>
     <color name="colorBlack">#000</color>
     <color name="colorRed">#E30000</color>
+    <color name="tranparentBlack">#B2000000</color>
 </resources>
