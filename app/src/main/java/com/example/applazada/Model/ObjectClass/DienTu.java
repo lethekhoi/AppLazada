@@ -9,6 +9,15 @@ public class DienTu {
     List<SanPham> sanPhams;
     String HinhSanPham;
     String tennoibat, tentopnoibat;
+    boolean thuonghieu;
+
+    public boolean isThuonghieu() {
+        return thuonghieu;
+    }
+
+    public void setThuonghieu(boolean thuonghieu) {
+        this.thuonghieu = thuonghieu;
+    }
 
     public String getTennoibat() {
         return tennoibat;

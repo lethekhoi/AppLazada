@@ -23,9 +23,11 @@ import java.util.List;
 public class AdapterTopDienThoaiDienTu extends RecyclerView.Adapter<AdapterTopDienThoaiDienTu.ViewHolder> {
     Context context;
     List<SanPham> sanPhamList;
+    int layout;
 
-    public AdapterTopDienThoaiDienTu(Context context, List<SanPham> sanPhamList) {
+    public AdapterTopDienThoaiDienTu(Context context, int layout, List<SanPham> sanPhamList) {
         this.context = context;
+        this.layout = layout;
         this.sanPhamList = sanPhamList;
     }
 
@@ -48,7 +50,7 @@ public class AdapterTopDienThoaiDienTu extends RecyclerView.Adapter<AdapterTopDi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.custom_layout_topdienthoaivamaytinhbang, parent, false);
+        View view = inflater.inflate(layout, parent, false);
         return new ViewHolder(view);
     }
 

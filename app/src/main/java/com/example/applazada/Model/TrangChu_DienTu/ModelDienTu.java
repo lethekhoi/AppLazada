@@ -19,8 +19,9 @@ public class ModelDienTu {
 
     public List<SanPham> LayDanhSachSanPhamTop(String tenham, String tenmang) {
 
-        String dataJSON = "";
+
         List<SanPham> sanPhamList = new ArrayList<>();
+        String dataJSON = "";
         List<HashMap<String, String>> attrs = new ArrayList<>();
         //lấy bằng POST
         String duongdan = TrangChuActivity.SERVER_NAME;

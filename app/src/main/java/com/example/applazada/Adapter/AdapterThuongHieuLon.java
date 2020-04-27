@@ -1,6 +1,8 @@
 package com.example.applazada.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +16,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applazada.Model.ObjectClass.ThuongHieu;
 import com.example.applazada.R;
+import com.example.applazada.View.HienThiSanPhamTheoDanhMuc.HienThiSanPhamTheoDanhMucActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdapterThuongHieuLon extends RecyclerView.Adapter<AdapterThuongHieuLon.ViewHolder> {
+    boolean kiemtra;
 
     Context context;
     List<ThuongHieu> thuongHieus;
 
-    public AdapterThuongHieuLon(Context context, List<ThuongHieu> thuongHieus) {
+    public AdapterThuongHieuLon(Context context, List<ThuongHieu> thuongHieus, boolean kiemtra) {
+        this.kiemtra = kiemtra;
         this.context = context;
         this.thuongHieus = thuongHieus;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTieuDeThuongHieu;
@@ -55,7 +61,7 @@ public class AdapterThuongHieuLon extends RecyclerView.Adapter<AdapterThuongHieu
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        ThuongHieu thuongHieu = thuongHieus.get(position);
+        final ThuongHieu thuongHieu = thuongHieus.get(position);
         holder.txtTieuDeThuongHieu.setText(thuongHieu.getTENTHUONGHIEU());
 
         Picasso.with(context).load(thuongHieu.getHINHTHUONGHIEU()).resize(120, 140).into(holder.imgHinhThuongHieu, new Callback() {
@@ -66,6 +72,18 @@ public class AdapterThuongHieuLon extends RecyclerView.Adapter<AdapterThuongHieu
 
             @Override
             public void onError() {
+
+            }
+        });
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iHienThiSanPhamTheoDanhMuc = new Intent(context, HienThiSanPhamTheoDanhMucActivity.class);
+                iHienThiSanPhamTheoDanhMuc.putExtra("MALOAI", thuongHieu.getMATHUONGHIEU());
+                iHienThiSanPhamTheoDanhMuc.putExtra("TENLOAI", thuongHieu.getTENTHUONGHIEU());
+                iHienThiSanPhamTheoDanhMuc.putExtra("KIEMTRA", kiemtra);
+                context.startActivity(iHienThiSanPhamTheoDanhMuc);
+
 
             }
         });

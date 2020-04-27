@@ -13,11 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".View.HienThiSanPhamTheoDanhMuc.HienThiSanPhamTheoDanhMucActivity"></activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".View.DangNhap_DangKy.DangNhapActivity"></activity>
+        <activity android:name=".View.DangNhap_DangKy.DangNhapActivity" />
         <activity
             android:name=".View.ManHinhChao.ManHinhChaoActivity"
             android:screenOrientation="portrait"
@@ -29,7 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name=".View.TrangChu.TrangChuActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />

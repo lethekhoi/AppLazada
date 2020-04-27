@@ -89,7 +89,7 @@ public class FragmentDienTu extends Fragment implements ViewDienTu {
 
     @Override
     public void HienThiSanPhamMoiVe(List<SanPham> sanPhams) {
-        AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(getContext(), sanPhams);
+        AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(getContext(), R.layout.custom_layout_topdienthoaivamaytinhbang, sanPhams);
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         recyclerViewHangMoiVe.setLayoutManager(layoutManager1);
         recyclerViewHangMoiVe.setAdapter(adapterTopDienThoaiDienTu);

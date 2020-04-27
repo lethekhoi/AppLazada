@@ -53,7 +53,7 @@ public class AdapterDienTu extends RecyclerView.Adapter<AdapterDienTu.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DienTu dienTu = dienTuList.get(position);
         //xử lí hiển thị thương hieu lớn
-        AdapterThuongHieuLon adapterThuongHieuLon = new AdapterThuongHieuLon(context, dienTu.getThuongHieus());
+        AdapterThuongHieuLon adapterThuongHieuLon = new AdapterThuongHieuLon(context, dienTu.getThuongHieus(), dienTu.isThuonghieu());
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 3, GridLayoutManager.HORIZONTAL, false);
         holder.recyclerViewThuongHieuLon.setLayoutManager(layoutManager);
         holder.recyclerViewThuongHieuLon.setAdapter(adapterThuongHieuLon);
@@ -61,7 +61,7 @@ public class AdapterDienTu extends RecyclerView.Adapter<AdapterDienTu.ViewHolder
         adapterThuongHieuLon.notifyDataSetChanged();
 
         //xử lí hiển thị top sản phẩm
-        AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(context, dienTu.getSanPhams());
+        AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(context, R.layout.custom_layout_topdienthoaivamaytinhbang, dienTu.getSanPhams());
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
         holder.recyclerViewTopSanPham.setLayoutManager(layoutManager1);
         holder.txtTopSanPhamNoiBat.setText(dienTu.getTentopnoibat().toString());
