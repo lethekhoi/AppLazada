@@ -1,5 +1,8 @@
 package com.example.applazada.Presenter.HienThiSanPhamTheoDanhMuc;
 
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.example.applazada.Model.HienThiSanPhamTheoDanhMuc.ModelHienThiSanPhamTheoDanhMuc;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.View.HienThiSanPhamTheoDanhMuc.ViewHienThiSanPhamTheoDanhMuc;
@@ -21,9 +24,9 @@ public class PresenterLogicHienThiSanPhamTheoDanhMuc implements IPresenterHienTh
     public void LayDanhSachSanPhamTheoMaLoai(int masp, boolean kiemtra) {
         List<SanPham> sanPhamList = new ArrayList<>();
         if (kiemtra) {
-            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaThuongHieu", "DANHSACHSANPHAM", 20);
+            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaThuongHieu", "DANHSACHSANPHAM", 0);
         } else {
-            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaLoaiDanhMuc", "DANHSACHSANPHAM", 20);
+            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaLoaiDanhMuc", "DANHSACHSANPHAM", 0);
         }
 
         if (sanPhamList.size() > 0) {
@@ -33,5 +36,22 @@ public class PresenterLogicHienThiSanPhamTheoDanhMuc implements IPresenterHienTh
         }
 
 
+    }
+
+    public List<SanPham> LayDanhSachSanPhamTheoMaLoaiLoadMore(int masp, boolean kiemtra, int limit, ProgressBar progressBar) {
+        progressBar.setVisibility(View.VISIBLE);
+        List<SanPham> sanPhamList = new ArrayList<>();
+        if (kiemtra) {
+            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaThuongHieu", "DANHSACHSANPHAM", limit);
+        } else {
+            sanPhamList = modelHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoai(masp, "LayDanhSachSanPhamTheoMaLoaiDanhMuc", "DANHSACHSANPHAM", limit);
+        }
+
+
+        if (sanPhamList.size() != 0 && sanPhamList != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        return sanPhamList;
     }
 }

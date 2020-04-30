@@ -11,25 +11,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.example.applazada.Adapter.AdapterTopDienThoaiDienTu;
+import com.example.applazada.Model.ObjectClass.ILoadMore;
+import com.example.applazada.Model.ObjectClass.LoadMoreScroll;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Presenter.HienThiSanPhamTheoDanhMuc.PresenterLogicHienThiSanPhamTheoDanhMuc;
 import com.example.applazada.R;
 
 import java.util.List;
 
-public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity implements ViewHienThiSanPhamTheoDanhMuc, View.OnClickListener {
+public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity implements ViewHienThiSanPhamTheoDanhMuc, View.OnClickListener, ILoadMore {
     RecyclerView recyclerView;
     Button btnThayDoiTrangThaiRecycler;
     RecyclerView.LayoutManager layoutManager;
     boolean danggrid = true;
     boolean kiemtra;
     int masp;
+    ProgressBar progressBar;
     Toolbar toolbar;
     AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu;
     PresenterLogicHienThiSanPhamTheoDanhMuc presenterLogicHienThiSanPhamTheoDanhMuc;
+    List<SanPham> sanPhamList1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
         recyclerView = findViewById(R.id.recyclerHienThiSanPhamTheoDanhMuc);
         btnThayDoiTrangThaiRecycler = findViewById(R.id.btnThayDoiTrangThaiRecycler);
         toolbar = findViewById(R.id.toolbarHienThiSP);
+        progressBar = findViewById(R.id.progress_bar);
 
         Intent intent = getIntent();
         masp = intent.getIntExtra("MALOAI", 0);
@@ -63,19 +68,20 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
 
     @Override
     public void HienThiDanhSachSanPham(List<SanPham> sanPhamList) {
-
+        sanPhamList1 = sanPhamList;
 
         if (danggrid) {
             layoutManager = new GridLayoutManager(HienThiSanPhamTheoDanhMucActivity.this, 2);
-            adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(HienThiSanPhamTheoDanhMucActivity.this, R.layout.custom_layout_topdienthoaivamaytinhbang, sanPhamList);
+            adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(HienThiSanPhamTheoDanhMucActivity.this, R.layout.custom_layout_topdienthoaivamaytinhbang, sanPhamList1);
 
         } else {
             layoutManager = new LinearLayoutManager(this);
-            adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(HienThiSanPhamTheoDanhMucActivity.this, R.layout.custom_layout_list_topdienthoaivamaytinhbang, sanPhamList);
+            adapterTopDienThoaiDienTu = new AdapterTopDienThoaiDienTu(HienThiSanPhamTheoDanhMucActivity.this, R.layout.custom_layout_list_topdienthoaivamaytinhbang, sanPhamList1);
         }
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterTopDienThoaiDienTu);
+        recyclerView.addOnScrollListener(new LoadMoreScroll(layoutManager, this));
         adapterTopDienThoaiDienTu.notifyDataSetChanged();
 
     }
@@ -96,6 +102,19 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
 
         }
 
+
+    }
+
+    @Override
+    public void LoadMore(int tongitem) {
+        List<SanPham> listsanPhamsLoadMore = presenterLogicHienThiSanPhamTheoDanhMuc.LayDanhSachSanPhamTheoMaLoaiLoadMore(masp, kiemtra, tongitem, progressBar);
+        sanPhamList1.addAll(listsanPhamsLoadMore);
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterTopDienThoaiDienTu.notifyDataSetChanged();
+            }
+        });
 
     }
 }
