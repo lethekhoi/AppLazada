@@ -43,6 +43,7 @@ import java.util.List;
 
 public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener {
     public static final String SERVER_NAME = "http://10.0.3.2//weblazada/loaisanpham.php";
+    public static final String SERVER = "http://10.0.3.2//weblazada";
     ViewPager viewPager;
     TabLayout tabLayout;
     Toolbar toolbar;

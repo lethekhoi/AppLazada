@@ -1,11 +1,22 @@
 package com.example.applazada.Model.ObjectClass;
 
+import java.util.List;
+
 public class SanPham {
     int MASP, GIA, SOLUONG, MALOAISP, MATHUONGHIEU, MANV, LUOTMUA;
     String ANHLON;
     String THONGTIN;
     String ANHNHO;
     String TENSP;
+    List<ChiTietSanPham> chiTietSanPhamList;
+
+    public List<ChiTietSanPham> getChiTietSanPhamList() {
+        return chiTietSanPhamList;
+    }
+
+    public void setChiTietSanPhamList(List<ChiTietSanPham> chiTietSanPhamList) {
+        this.chiTietSanPhamList = chiTietSanPhamList;
+    }
 
     public String getTENSP() {
         return TENSP;

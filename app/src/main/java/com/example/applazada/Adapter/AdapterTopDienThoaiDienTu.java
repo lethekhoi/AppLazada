@@ -1,6 +1,7 @@
 package com.example.applazada.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.R;
+import com.example.applazada.View.ChiTietSanPham.ChiTietSanPhamActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +38,7 @@ public class AdapterTopDienThoaiDienTu extends RecyclerView.Adapter<AdapterTopDi
         ProgressBar progressBar;
         ImageView imgHinhSanPham;
         TextView txtTenSP, txtGiaTien, txtGiamGia;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -42,6 +46,7 @@ public class AdapterTopDienThoaiDienTu extends RecyclerView.Adapter<AdapterTopDi
             imgHinhSanPham = itemView.findViewById(R.id.imgHinhDienThoaiMayTinhBang);
             txtTenSP = itemView.findViewById(R.id.txtTieuDeTopDienThoaiDienTu);
             txtGiaTien = itemView.findViewById(R.id.txtGiaDienTu);
+            cardView = itemView.findViewById(R.id.cardView);
             txtGiamGia = itemView.findViewById(R.id.txtGiamGiaDienTu);
         }
     }
@@ -74,7 +79,15 @@ public class AdapterTopDienThoaiDienTu extends RecyclerView.Adapter<AdapterTopDi
 
             }
         });
-
+        holder.cardView.setTag(sanPham.getMASP());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iChiTietSanPham = new Intent(context, ChiTietSanPhamActivity.class);
+                iChiTietSanPham.putExtra("masp", (int) view.getTag());
+                context.startActivity(iChiTietSanPham);
+            }
+        });
 
     }
 

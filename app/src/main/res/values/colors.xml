@@ -12,4 +12,6 @@
     <color name="colorBlack">#000</color>
     <color name="colorRed">#E30000</color>
     <color name="tranparentBlack">#B2000000</color>
+    <color name="colorGreen">#B202D50D</color>
+    <color name="colorSliderInActive">#8095a1</color>
 </resources>
