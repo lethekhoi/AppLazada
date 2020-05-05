@@ -57,6 +57,7 @@ public class ModelChiTietSanPham {
                 sanPham.setMALOAISP(object.getInt("MALOAISP"));
                 sanPham.setMATHUONGHIEU(object.getInt("MATHUONGHIEU"));
                 sanPham.setMANV(object.getInt("MANV"));
+                sanPham.setTENNV(object.getString("TENNV"));
                 sanPham.setLUOTMUA(object.getInt("LUOTMUA"));
 
                 JSONArray jsonArrayThongSoKyThuat = object.getJSONArray("THONGSOKYTHUAT");

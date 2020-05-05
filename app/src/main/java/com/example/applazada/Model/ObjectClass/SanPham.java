@@ -9,6 +9,15 @@ public class SanPham {
     String ANHNHO;
     String TENSP;
     List<ChiTietSanPham> chiTietSanPhamList;
+    String TENNV;
+
+    public String getTENNV() {
+        return TENNV;
+    }
+
+    public void setTENNV(String TENNV) {
+        this.TENNV = TENNV;
+    }
 
     public List<ChiTietSanPham> getChiTietSanPhamList() {
         return chiTietSanPhamList;

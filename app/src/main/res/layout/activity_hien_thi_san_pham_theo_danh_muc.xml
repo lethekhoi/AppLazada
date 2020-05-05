@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            app:theme="@style/menuitemcolor"
             android:id="@+id/toolbarHienThiSP"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

@@ -32,4 +32,10 @@
     </declare-styleable>
 
 
+    <style name="DoiMauNgoiSaoRatingBar" parent="AppTheme">
+        <item name="colorControlNormal">@color/bgLogo</item>
+
+    </style>
+
+
 </resources>
