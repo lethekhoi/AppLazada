@@ -240,15 +240,16 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/lnThongSoKyThuat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
                     <TextView
-                        android:text="Thông Số Kỹ Thuật"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="Thông Số Kỹ Thuật" />
 
                 </LinearLayout>
 
@@ -271,15 +272,36 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đánh giá và nhận xét" />
 
-                <ListView
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đánh giá và nhận xét" />
+
+                    <TextView
+                        android:id="@+id/txtVietDanhGia"
+                        android:textColor="@color/colorFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+
+                        android:text="Viết đánh giá" />
+
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
 
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <View
                     android:layout_width="match_parent"

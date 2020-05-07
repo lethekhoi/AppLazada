@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -22,6 +23,7 @@ import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.FragmentSliderChiTietSanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.applazada.R;
+import com.example.applazada.View.DanhGia.ThemDanhGiaActivity;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
 
 import java.text.DecimalFormat;
@@ -29,16 +31,17 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChiTietSanPham, ViewPager.OnPageChangeListener {
+public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChiTietSanPham, ViewPager.OnPageChangeListener, View.OnClickListener {
     Toolbar toolbar;
     ViewPager viewPager;
     PresenterLogicChiTietSanPham presenterLogicChiTietSanPham;
     TextView[] txtDots;
     LinearLayout layoutDots, lnThongSoKyThuat;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet;
+    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia;
     ImageView imgXemThem;
     Boolean kiemtraxochitiet = false;
+    int masp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         txtThongTinChiTiet = findViewById(R.id.txtThongTinChiTiet);
         txtTenCuaHangDongGoi = findViewById(R.id.txtTenChDongGoi);
         txtGiaTien = findViewById(R.id.txtGiaTien);
+        txtVietDanhGia = findViewById(R.id.txtVietDanhGia);
         lnThongSoKyThuat = findViewById(R.id.lnThongSoKyThuat);
         imgXemThem = findViewById(R.id.imgxemthemchitiet);
         toolbar = findViewById(R.id.toolbarChiTietSP);
@@ -59,6 +63,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         layoutDots = findViewById(R.id.layoutdot);
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.LayChiTietSanPham(masp);
+        txtVietDanhGia.setOnClickListener(this);
 
 
     }
@@ -71,6 +76,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
     @Override
     public void HienChiTietSanPham(final SanPham sanPham) {
+        masp = sanPham.getMASP();
+
         txtTenSanPham.setText(sanPham.getTENSP());
         txtTenCuaHangDongGoi.setText(sanPham.getTENNV());
         NumberFormat numberFormat = new DecimalFormat("###,###");
@@ -197,6 +204,21 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+
+            case R.id.txtVietDanhGia:
+                Intent iThemDanhGia = new Intent(this, ThemDanhGiaActivity.class);
+                iThemDanhGia.putExtra("masp", masp);
+                startActivity(iThemDanhGia);
+                break;
+        }
+
 
     }
 }
