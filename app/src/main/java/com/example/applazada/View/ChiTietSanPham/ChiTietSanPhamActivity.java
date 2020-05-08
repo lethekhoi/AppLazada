@@ -27,6 +27,7 @@ import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.FragmentSliderChiTietSanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.applazada.R;
+import com.example.applazada.View.DanhGia.DanhSachDanhGiaActivity;
 import com.example.applazada.View.DanhGia.ThemDanhGiaActivity;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
 
@@ -42,7 +43,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     TextView[] txtDots;
     LinearLayout layoutDots, lnThongSoKyThuat;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia;
+    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet;
     ImageView imgXemThem;
     Boolean kiemtraxochitiet = false;
     List<DanhGia> danhGiaList;
@@ -55,12 +56,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         setContentView(R.layout.activity_chi_tiet_san_pham);
 
 
-        int masp = getIntent().getIntExtra("masp", 0);
+        masp = getIntent().getIntExtra("masp", 0);
         txtTenSanPham = findViewById(R.id.txtTenSanPham);
         txtThongTinChiTiet = findViewById(R.id.txtThongTinChiTiet);
         txtTenCuaHangDongGoi = findViewById(R.id.txtTenChDongGoi);
         txtGiaTien = findViewById(R.id.txtGiaTien);
         txtVietDanhGia = findViewById(R.id.txtVietDanhGia);
+        txtXemTatCaNhanXet = findViewById(R.id.txtXemTatCaNhanXet);
         lnThongSoKyThuat = findViewById(R.id.lnThongSoKyThuat);
         imgXemThem = findViewById(R.id.imgxemthemchitiet);
         toolbar = findViewById(R.id.toolbarChiTietSP);
@@ -74,7 +76,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         presenterLogicChiTietSanPham.LayDanhSachDanhGiaCuaSanPham(masp, 0);
 
         txtVietDanhGia.setOnClickListener(this);
-
+        txtXemTatCaNhanXet.setOnClickListener(this);
 
     }
 
@@ -227,6 +229,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 Intent iThemDanhGia = new Intent(this, ThemDanhGiaActivity.class);
                 iThemDanhGia.putExtra("masp", masp);
                 startActivity(iThemDanhGia);
+                break;
+            case R.id.txtXemTatCaNhanXet:
+                Intent iDanhSachDanhGia = new Intent(this, DanhSachDanhGiaActivity.class);
+                iDanhSachDanhGia.putExtra("masp", masp);
+                startActivity(iDanhSachDanhGia);
                 break;
         }
 

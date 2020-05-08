@@ -23,6 +23,8 @@ import com.example.applazada.Presenter.DanhGia.PresenterLogicDanhGia;
 import com.example.applazada.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
 public class ThemDanhGiaActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, ViewDanhGia, View.OnClickListener {
     private static int READ_PHONE_STATE_PERMISSION = 1;
     TelephonyManager telephonyManager;
@@ -67,6 +69,11 @@ public class ThemDanhGiaActivity extends AppCompatActivity implements RatingBar.
     @Override
     public void DanhGiaThatBai() {
         Toast.makeText(this, "Bạn không thể đánh giá sản phẩm này", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void HienThiDanhSachDanhGiaTheoSanPham(List<DanhGia> danhGiaList) {
+
     }
 
     @Override
