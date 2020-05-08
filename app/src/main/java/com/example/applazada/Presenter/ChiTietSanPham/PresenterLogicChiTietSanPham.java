@@ -1,8 +1,11 @@
 package com.example.applazada.Presenter.ChiTietSanPham;
 
 import com.example.applazada.Model.ChiTietSanPham.ModelChiTietSanPham;
+import com.example.applazada.Model.ObjectClass.DanhGia;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.View.ChiTietSanPham.ViewChiTietSanPham;
+
+import java.util.List;
 
 public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
 
@@ -21,6 +24,14 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
             String[] linkhinhanh = sanPham.getANHNHO().split(",");
             viewChiTietSanPham.HienSliderSanPham(linkhinhanh);
             viewChiTietSanPham.HienChiTietSanPham(sanPham);
+        }
+    }
+
+    @Override
+    public void LayDanhSachDanhGiaCuaSanPham(int masp, int limit) {
+        List<DanhGia> danhGias = modelChiTietSanPham.LayDanhSachDanhCuaSanPham(masp, limit);
+        if (danhGias.size() > 0) {
+            viewChiTietSanPham.HienThiDanhGia(danhGias);
         }
     }
 }

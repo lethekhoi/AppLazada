@@ -26,7 +26,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class ThemDanhGiaActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, ViewDanhGia, View.OnClickListener {
     private static int READ_PHONE_STATE_PERMISSION = 1;
     TelephonyManager telephonyManager;
-    String imei;
+
     TextInputLayout input_edTieuDe, input_edNoiDung;
     EditText edTieuDe, edNoiDung;
     RatingBar rbDanhGia;

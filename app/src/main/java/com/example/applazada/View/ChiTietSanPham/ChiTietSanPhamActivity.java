@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -17,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.applazada.Adapter.AdapterDanhGia;
 import com.example.applazada.Adapter.AdapterViewPagerSlider;
 import com.example.applazada.Model.ObjectClass.ChiTietSanPham;
+import com.example.applazada.Model.ObjectClass.DanhGia;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.FragmentSliderChiTietSanPham;
 import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
@@ -41,6 +45,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia;
     ImageView imgXemThem;
     Boolean kiemtraxochitiet = false;
+    List<DanhGia> danhGiaList;
+    RecyclerView recyclerView;
     int masp;
 
     @Override
@@ -61,8 +67,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpagerSlider);
         layoutDots = findViewById(R.id.layoutdot);
+        recyclerView = findViewById(R.id.recyclerDanhGia);
+
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.LayChiTietSanPham(masp);
+        presenterLogicChiTietSanPham.LayDanhSachDanhGiaCuaSanPham(masp, 0);
+
         txtVietDanhGia.setOnClickListener(this);
 
 
@@ -164,6 +174,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
     }
 
+
     private void ThemDotSlider(int vitrihientai) {
         txtDots = new TextView[fragmentList.size()];
         layoutDots.removeAllViews();
@@ -219,6 +230,17 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 break;
         }
 
+
+    }
+
+    @Override
+    public void HienThiDanhGia(List<DanhGia> danhGiaList) {
+        AdapterDanhGia adapterDanhGia = new AdapterDanhGia(this, danhGiaList, 3);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapterDanhGia);
+
+        adapterDanhGia.notifyDataSetChanged();
 
     }
 }

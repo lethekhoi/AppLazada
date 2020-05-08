@@ -274,10 +274,9 @@
 
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                   >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -286,18 +285,18 @@
 
                     <TextView
                         android:id="@+id/txtVietDanhGia"
-                        android:textColor="@color/colorFacebook"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
+                        android:text="Viết đánh giá"
 
-                        android:text="Viết đánh giá" />
+                        android:textColor="@color/colorFacebook" />
 
                 </LinearLayout>
 
 
                 <androidx.recyclerview.widget.RecyclerView
-
+                    android:id="@+id/recyclerDanhGia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
