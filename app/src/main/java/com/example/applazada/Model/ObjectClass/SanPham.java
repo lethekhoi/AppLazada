@@ -10,6 +10,15 @@ public class SanPham {
     String TENSP;
     List<ChiTietSanPham> chiTietSanPhamList;
     String TENNV;
+    byte[] hinhgiohang;
+
+    public byte[] getHinhgiohang() {
+        return hinhgiohang;
+    }
+
+    public void setHinhgiohang(byte[] hinhgiohang) {
+        this.hinhgiohang = hinhgiohang;
+    }
 
     public String getTENNV() {
         return TENNV;

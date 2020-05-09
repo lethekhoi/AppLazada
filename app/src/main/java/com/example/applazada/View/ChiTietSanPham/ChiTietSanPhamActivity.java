@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.applazada.Adapter.AdapterDanhGia;
 import com.example.applazada.Adapter.AdapterViewPagerSlider;
@@ -30,7 +33,9 @@ import com.example.applazada.R;
 import com.example.applazada.View.DanhGia.DanhSachDanhGiaActivity;
 import com.example.applazada.View.DanhGia.ThemDanhGiaActivity;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
+import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -44,11 +49,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     LinearLayout layoutDots, lnThongSoKyThuat;
     List<Fragment> fragmentList;
     TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet;
-    ImageView imgXemThem;
+    ImageView imgXemThem, imgThemGioHang;
     Boolean kiemtraxochitiet = false;
     List<DanhGia> danhGiaList;
     RecyclerView recyclerView;
     int masp;
+    SanPham sanPhamioHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         txtXemTatCaNhanXet = findViewById(R.id.txtXemTatCaNhanXet);
         lnThongSoKyThuat = findViewById(R.id.lnThongSoKyThuat);
         imgXemThem = findViewById(R.id.imgxemthemchitiet);
+        imgThemGioHang = findViewById(R.id.imgThemGioHang);
         toolbar = findViewById(R.id.toolbarChiTietSP);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpagerSlider);
@@ -77,7 +84,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
         txtVietDanhGia.setOnClickListener(this);
         txtXemTatCaNhanXet.setOnClickListener(this);
-
+        imgThemGioHang.setOnClickListener(this);
     }
 
     @Override
@@ -89,6 +96,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     @Override
     public void HienChiTietSanPham(final SanPham sanPham) {
         masp = sanPham.getMASP();
+        sanPhamioHang = sanPham;
+
 
         txtTenSanPham.setText(sanPham.getTENSP());
         txtTenCuaHangDongGoi.setText(sanPham.getTENNV());
@@ -235,6 +244,19 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 iDanhSachDanhGia.putExtra("masp", masp);
                 startActivity(iDanhSachDanhGia);
                 break;
+
+            case R.id.imgThemGioHang:
+                Fragment fragment = fragmentList.get(0);
+                View view1 = fragment.getView();
+                ImageView imageView = view1.findViewById(R.id.imgHinhSlider);
+                Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] hinhsanphamgiohang = byteArrayOutputStream.toByteArray();
+                sanPhamioHang.setHinhgiohang(hinhsanphamgiohang);
+
+                presenterLogicChiTietSanPham.ThemGioHang(sanPhamioHang, this);
+                break;
         }
 
 
@@ -249,5 +271,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
         adapterDanhGia.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public void ThemGioHangThanhCong() {
+        Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ThemGioHangThatBai() {
+        Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
     }
 }

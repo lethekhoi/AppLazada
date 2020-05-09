@@ -1,6 +1,9 @@
 package com.example.applazada.Presenter.ChiTietSanPham;
 
+import android.content.Context;
+
 import com.example.applazada.Model.ChiTietSanPham.ModelChiTietSanPham;
+import com.example.applazada.Model.GioHang.ModelGioHang;
 import com.example.applazada.Model.ObjectClass.DanhGia;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.View.ChiTietSanPham.ViewChiTietSanPham;
@@ -11,10 +14,12 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
 
     ViewChiTietSanPham viewChiTietSanPham;
     ModelChiTietSanPham modelChiTietSanPham;
+    ModelGioHang modelGioHang;
 
     public PresenterLogicChiTietSanPham(ViewChiTietSanPham viewChiTietSanPham) {
         this.viewChiTietSanPham = viewChiTietSanPham;
         modelChiTietSanPham = new ModelChiTietSanPham();
+        modelGioHang = new ModelGioHang();
     }
 
     @Override
@@ -32,6 +37,17 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
         List<DanhGia> danhGias = modelChiTietSanPham.LayDanhSachDanhCuaSanPham(masp, limit);
         if (danhGias.size() > 0) {
             viewChiTietSanPham.HienThiDanhGia(danhGias);
+        }
+    }
+
+    @Override
+    public void ThemGioHang(SanPham sanPham, Context context) {
+        modelGioHang.MoKetNoiSQL(context);
+        boolean kiemtra = modelGioHang.ThemGioHang(sanPham);
+        if (kiemtra) {
+            viewChiTietSanPham.ThemGioHangThanhCong();
+        } else {
+            viewChiTietSanPham.ThemGioHangThatBai();
         }
     }
 }

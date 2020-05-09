@@ -53,13 +53,15 @@ public class DanhSachDanhGiaActivity extends AppCompatActivity implements ViewDa
 
         tatcaDanhGia.addAll(danhGiaList);
 
-        AdapterDanhGia adapterDanhGia = new AdapterDanhGia(this, tatcaDanhGia, 0);
+        final AdapterDanhGia adapterDanhGia = new AdapterDanhGia(this, tatcaDanhGia, 0);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewDanhSachDanhGia.setLayoutManager(layoutManager);
         recyclerViewDanhSachDanhGia.setAdapter(adapterDanhGia);
         recyclerViewDanhSachDanhGia.addOnScrollListener(new LoadMoreScroll(layoutManager, this));
-
         adapterDanhGia.notifyDataSetChanged();
+
+
+
     }
 
     @Override
