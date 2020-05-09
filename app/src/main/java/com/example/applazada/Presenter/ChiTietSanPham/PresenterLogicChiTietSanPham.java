@@ -16,6 +16,11 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
     ModelChiTietSanPham modelChiTietSanPham;
     ModelGioHang modelGioHang;
 
+
+    public PresenterLogicChiTietSanPham() {
+        modelGioHang = new ModelGioHang();
+    }
+
     public PresenterLogicChiTietSanPham(ViewChiTietSanPham viewChiTietSanPham) {
         this.viewChiTietSanPham = viewChiTietSanPham;
         modelChiTietSanPham = new ModelChiTietSanPham();
@@ -50,4 +55,13 @@ public class PresenterLogicChiTietSanPham implements IPresenterChiTietSanPham {
             viewChiTietSanPham.ThemGioHangThatBai();
         }
     }
+
+
+    public int DemSanPhamTrongGioHang(Context context) {
+        modelGioHang.MoKetNoiSQL(context);
+        List<SanPham> sanPhamList = modelGioHang.LayDanhSachSanPhamTrongGioHang();
+        int dem = sanPhamList.size();
+        return dem;
+    }
+
 }

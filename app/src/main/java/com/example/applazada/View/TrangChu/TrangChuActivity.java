@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -13,13 +14,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
 import com.example.applazada.Model.DangNhap_DangKy.ModelDangNhap;
 import com.example.applazada.Model.ObjectClass.LoaiSanPham;
+import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
 import com.example.applazada.View.DangNhap_DangKy.DangNhapActivity;
@@ -56,6 +60,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     String TenNguoiDung = "";
     AccessToken accessToken;
     Menu menu;
+    TextView txtGioHang;
     ModelDangNhap modelDangNhap;
     MenuItem itemDangNhap, menuItDangXuat;
     GoogleApiClient mGoogleApiClient;
@@ -108,6 +113,13 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
         this.menu = menu;
+        MenuItem itemGioHang = this.menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txtGioHang = giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+
+
         itemDangNhap = menu.findItem(R.id.itDangNhap);
         menuItDangXuat = menu.findItem(R.id.itDangXuat);
         accessToken = logicXuLyMenu.LayTenNguoiDungFacebook();

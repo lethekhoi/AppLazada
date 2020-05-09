@@ -3,6 +3,7 @@ package com.example.applazada.View.ChiTietSanPham;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -48,7 +50,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     TextView[] txtDots;
     LinearLayout layoutDots, lnThongSoKyThuat;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet;
+    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet, txtGioHang;
     ImageView imgXemThem, imgThemGioHang;
     Boolean kiemtraxochitiet = false;
     List<DanhGia> danhGiaList;
@@ -90,6 +92,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
+        MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txtGioHang = giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
         return true;
     }
 
@@ -276,6 +282,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     @Override
     public void ThemGioHangThanhCong() {
         Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
     }
 
     @Override

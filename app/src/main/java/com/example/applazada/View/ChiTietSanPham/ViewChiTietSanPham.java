@@ -15,4 +15,6 @@ public interface ViewChiTietSanPham {
     void ThemGioHangThanhCong();
 
     void ThemGioHangThatBai();
+
+
 }

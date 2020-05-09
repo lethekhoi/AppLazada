@@ -10,4 +10,6 @@ public interface IPresenterChiTietSanPham {
     void LayDanhSachDanhGiaCuaSanPham(int masp, int limit);
 
     void ThemGioHang(SanPham sanPham, Context context);
+
+
 }
