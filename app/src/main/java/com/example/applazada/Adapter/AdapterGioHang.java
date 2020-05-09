@@ -3,6 +3,7 @@ package com.example.applazada.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applazada.Model.GioHang.ModelGioHang;
 import com.example.applazada.Model.ObjectClass.SanPham;
 import com.example.applazada.R;
 import com.squareup.picasso.Callback;
@@ -59,7 +61,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         SanPham sanPham = sanPhamList.get(position);
         holder.txtTenGioHang.setText(sanPham.getTENSP());
         NumberFormat numberFormat = new DecimalFormat("###,###");
@@ -73,7 +75,11 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
         holder.imgXoaSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ModelGioHang modelGioHang = new ModelGioHang();
+                modelGioHang.MoKetNoiSQL(context);
+                modelGioHang.XoaSanPhamTrongGioHang((int) view.getTag());
+                sanPhamList.remove(position);
+                notifyDataSetChanged();
             }
         });
 

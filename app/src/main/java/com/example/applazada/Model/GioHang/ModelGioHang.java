@@ -20,6 +20,20 @@ public class ModelGioHang {
 
     }
 
+
+    public boolean XoaSanPhamTrongGioHang(int masp) {
+
+        int kiemtra = database.delete(DataSanPham.TB_GIOHANG, DataSanPham.TB_GIOHANG_MASP + "=" + masp, null);
+        if (kiemtra > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
+
     public boolean ThemGioHang(SanPham sanPham) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataSanPham.TB_GIOHANG_MASP, sanPham.getMASP());

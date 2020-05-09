@@ -67,6 +67,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     MenuItem itemDangNhap, menuItDangXuat;
     GoogleApiClient mGoogleApiClient;
     GoogleSignInResult googleSignInResult;
+    boolean onPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,4 +245,22 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
             linearLayout.animate().alpha(1).setDuration(200);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (onPause) {
+            PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
+            txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onPause = true;
+    }
+
 }

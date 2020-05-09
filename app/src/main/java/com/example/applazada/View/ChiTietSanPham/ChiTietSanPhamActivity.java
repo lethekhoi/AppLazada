@@ -57,6 +57,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     List<DanhGia> danhGiaList;
     RecyclerView recyclerView;
     int masp;
+    boolean onPause = false;
     SanPham sanPhamioHang;
 
     @Override
@@ -297,4 +298,22 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     public void ThemGioHangThatBai() {
         Toast.makeText(this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (onPause) {
+            PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
+            txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onPause = true;
+    }
+
 }

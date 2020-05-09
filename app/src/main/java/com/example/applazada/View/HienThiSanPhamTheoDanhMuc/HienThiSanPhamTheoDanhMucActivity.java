@@ -34,6 +34,7 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
     RecyclerView.LayoutManager layoutManager;
     boolean danggrid = true;
     boolean kiemtra;
+    boolean onPause = false;
     int masp;
     TextView txtGioHang;
     ProgressBar progressBar;
@@ -135,5 +136,23 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
             }
         });
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (onPause) {
+            PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
+            txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onPause = true;
     }
 }
