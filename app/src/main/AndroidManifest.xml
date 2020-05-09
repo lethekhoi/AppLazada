@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.DanhGia.DanhSachDanhGiaActivity"></activity>
+        <activity android:name=".View.GioHang.GioHangActivity"
+            android:label="Giỏ Hàng"
+            ></activity>
+        <activity android:name=".View.DanhGia.DanhSachDanhGiaActivity" />
         <activity
             android:name=".View.DanhGia.ThemDanhGiaActivity"
-            android:theme="@style/Base.Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Base.Theme.AppCompat.Dialog" />
         <activity android:name=".View.ChiTietSanPham.ChiTietSanPhamActivity" />
         <activity android:name=".View.HienThiSanPhamTheoDanhMuc.HienThiSanPhamTheoDanhMucActivity" />
 

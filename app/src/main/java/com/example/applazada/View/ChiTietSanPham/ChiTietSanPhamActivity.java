@@ -34,6 +34,7 @@ import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPh
 import com.example.applazada.R;
 import com.example.applazada.View.DanhGia.DanhSachDanhGiaActivity;
 import com.example.applazada.View.DanhGia.ThemDanhGiaActivity;
+import com.example.applazada.View.GioHang.GioHangActivity;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
 import com.squareup.picasso.Picasso;
 
@@ -96,6 +97,13 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
         txtGioHang = giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
         txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+        giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iGioHang = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
         return true;
     }
 

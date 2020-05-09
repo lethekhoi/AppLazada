@@ -2,6 +2,7 @@ package com.example.applazada.View.HienThiSanPhamTheoDanhMuc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,16 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.applazada.Adapter.AdapterTopDienThoaiDienTu;
 import com.example.applazada.Model.ObjectClass.ILoadMore;
 import com.example.applazada.Model.ObjectClass.LoadMoreScroll;
 import com.example.applazada.Model.ObjectClass.SanPham;
+import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPham;
 import com.example.applazada.Presenter.HienThiSanPhamTheoDanhMuc.PresenterLogicHienThiSanPhamTheoDanhMuc;
 import com.example.applazada.R;
+import com.example.applazada.View.GioHang.GioHangActivity;
+import com.example.applazada.View.TrangChu.TrangChuActivity;
 
 import java.util.List;
 
@@ -29,6 +35,7 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
     boolean danggrid = true;
     boolean kiemtra;
     int masp;
+    TextView txtGioHang;
     ProgressBar progressBar;
     Toolbar toolbar;
     AdapterTopDienThoaiDienTu adapterTopDienThoaiDienTu;
@@ -63,6 +70,18 @@ public class HienThiSanPhamTheoDanhMucActivity extends AppCompatActivity impleme
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menutrangchu, menu);
+        MenuItem itemGioHang = menu.findItem(R.id.itGioHang);
+        View giaoDienCustomGioHang = MenuItemCompat.getActionView(itemGioHang);
+        txtGioHang = giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
+        PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
+        txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
+        giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iGioHang = new Intent(HienThiSanPhamTheoDanhMucActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
         return true;
     }
 

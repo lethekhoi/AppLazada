@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
@@ -27,6 +28,7 @@ import com.example.applazada.Presenter.ChiTietSanPham.PresenterLogicChiTietSanPh
 import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
 import com.example.applazada.View.DangNhap_DangKy.DangNhapActivity;
+import com.example.applazada.View.GioHang.GioHangActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -118,7 +120,13 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         txtGioHang = giaoDienCustomGioHang.findViewById(R.id.txtSoLuongSanPhamGioHang);
         PresenterLogicChiTietSanPham presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham();
         txtGioHang.setText(String.valueOf(presenterLogicChiTietSanPham.DemSanPhamTrongGioHang(this)));
-
+        giaoDienCustomGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iGioHang = new Intent(TrangChuActivity.this, GioHangActivity.class);
+                startActivity(iGioHang);
+            }
+        });
 
         itemDangNhap = menu.findItem(R.id.itDangNhap);
         menuItDangXuat = menu.findItem(R.id.itDangXuat);
@@ -203,6 +211,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
                     this.menu.clear();
                     this.onCreateOptionsMenu(menu);
                 }
+                break;
 
 
         }
