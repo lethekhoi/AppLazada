@@ -58,7 +58,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     RecyclerView recyclerView;
     int masp;
     boolean onPause = false;
-    SanPham sanPhamioHang;
+    SanPham sanPhamGioHang;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +112,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     @Override
     public void HienChiTietSanPham(final SanPham sanPham) {
         masp = sanPham.getMASP();
-        sanPhamioHang = sanPham;
-
+        sanPhamGioHang = sanPham;
+        sanPhamGioHang.setSOLUONGTONKHO(sanPham.getSOLUONG());
 
         txtTenSanPham.setText(sanPham.getTENSP());
         txtTenCuaHangDongGoi.setText(sanPham.getTENNV());
@@ -268,9 +269,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] hinhsanphamgiohang = byteArrayOutputStream.toByteArray();
-                sanPhamioHang.setHinhgiohang(hinhsanphamgiohang);
+                sanPhamGioHang.setHinhgiohang(hinhsanphamgiohang);
+                sanPhamGioHang.setSOLUONG(1);
 
-                presenterLogicChiTietSanPham.ThemGioHang(sanPhamioHang, this);
+                presenterLogicChiTietSanPham.ThemGioHang(sanPhamGioHang, this);
                 break;
         }
 

@@ -3,7 +3,16 @@ package com.example.applazada.Model.ObjectClass;
 import java.util.List;
 
 public class SanPham {
-    int MASP, GIA, SOLUONG, MALOAISP, MATHUONGHIEU, MANV, LUOTMUA;
+    int MASP;
+    int GIA;
+    int SOLUONG;
+    int MALOAISP;
+    int MATHUONGHIEU;
+    int MANV;
+    int LUOTMUA;
+
+
+    int SOLUONGTONKHO;
     String ANHLON;
     String THONGTIN;
     String ANHNHO;
@@ -11,6 +20,14 @@ public class SanPham {
     List<ChiTietSanPham> chiTietSanPhamList;
     String TENNV;
     byte[] hinhgiohang;
+
+    public int getSOLUONGTONKHO() {
+        return SOLUONGTONKHO;
+    }
+
+    public void setSOLUONGTONKHO(int SOLUONGTONKHO) {
+        this.SOLUONGTONKHO = SOLUONGTONKHO;
+    }
 
     public byte[] getHinhgiohang() {
         return hinhgiohang;

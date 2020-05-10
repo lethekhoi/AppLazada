@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,15 +30,19 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
 
     Context context;
     List<SanPham> sanPhamList;
+    ModelGioHang modelGioHang;
 
     public AdapterGioHang(Context context, List<SanPham> sanPhamList) {
         this.context = context;
         this.sanPhamList = sanPhamList;
+        modelGioHang = new ModelGioHang();
+        modelGioHang.MoKetNoiSQL(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtTenGioHang, txtGiaGioHang, txtGiamGiaGioHang;
+        TextView txtTenGioHang, txtGiaGioHang, txtGiamGiaGioHang, txtSoLuongSP;
         ImageView imgHinhGioHang, imgXoaSanPham;
+        ImageButton imgTangSoLuongSP, imgGiamSoLuongSP;
         ProgressBar progressBar;
 
         public ViewHolder(@NonNull View itemView) {
@@ -47,6 +53,9 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
             imgHinhGioHang = itemView.findViewById(R.id.imgHinhHinhGioHang);
             imgXoaSanPham = itemView.findViewById(R.id.imgXoaSanPham);
             progressBar = itemView.findViewById(R.id.progress_bar_GioHang);
+            txtSoLuongSP = itemView.findViewById(R.id.txtSoLuongSanPham);
+            imgTangSoLuongSP = itemView.findViewById(R.id.imgTangSoLuongSP);
+            imgGiamSoLuongSP = itemView.findViewById(R.id.imgGiamSoLuongSP);
         }
     }
 
@@ -62,7 +71,7 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        SanPham sanPham = sanPhamList.get(position);
+        final SanPham sanPham = sanPhamList.get(position);
         holder.txtTenGioHang.setText(sanPham.getTENSP());
         NumberFormat numberFormat = new DecimalFormat("###,###");
         String gia = numberFormat.format(sanPham.getGIA()).toString();
@@ -82,6 +91,41 @@ public class AdapterGioHang extends RecyclerView.Adapter<AdapterGioHang.ViewHold
                 notifyDataSetChanged();
             }
         });
+
+        holder.txtSoLuongSP.setText(String.valueOf(sanPham.getSOLUONG()));
+
+        holder.imgTangSoLuongSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int soluong = Integer.parseInt(holder.txtSoLuongSP.getText().toString());
+                int soluongtonkho = sanPham.getSOLUONGTONKHO();
+
+                if (soluong < soluongtonkho) {
+                    soluong++;
+                } else {
+                    Toast.makeText(context, "Số lượng bạn mua quá số lượng có trong cửa hàng", Toast.LENGTH_SHORT).show();
+                }
+                modelGioHang.CapNhatSoLuongSanPhamGioHang(sanPham.getMASP(), soluong);
+                holder.txtSoLuongSP.setText(String.valueOf(soluong));
+
+            }
+        });
+        holder.imgGiamSoLuongSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int soluong = Integer.parseInt(holder.txtSoLuongSP.getText().toString());
+                if (soluong > 1) {
+                    soluong--;
+
+                }
+                modelGioHang.CapNhatSoLuongSanPhamGioHang(sanPham.getMASP(), soluong);
+                holder.txtSoLuongSP.setText(String.valueOf(soluong));
+
+
+            }
+        });
+
 
     }
 
