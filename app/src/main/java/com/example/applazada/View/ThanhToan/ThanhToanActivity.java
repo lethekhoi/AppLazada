@@ -41,8 +41,8 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
         imgChuyenKhoan = findViewById(R.id.imgChuyenKhoan);
         btnThanhToan = findViewById(R.id.btnThanhToan);
         cbCamKet = findViewById(R.id.cbCamKet);
-        presenterLogicThanhToan = new PresenterLogicThanhToan(this);
-        presenterLogicThanhToan.LayDanhSachSanPhamTrongGioHang(this);
+        presenterLogicThanhToan = new PresenterLogicThanhToan(this, this);
+        presenterLogicThanhToan.LayDanhSachSanPhamTrongGioHang();
         btnThanhToan.setOnClickListener(this);
         setSupportActionBar(toolbar);
     }
@@ -79,6 +79,7 @@ public class ThanhToanActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void DatHangThanhCong() {
         Toast.makeText(this, "Thành công", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

@@ -1,14 +1,5 @@
 package com.example.applazada.View.ChiTietSanPham;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,10 +10,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.applazada.Adapter.AdapterDanhGia;
 import com.example.applazada.Adapter.AdapterViewPagerSlider;
@@ -35,8 +36,8 @@ import com.example.applazada.R;
 import com.example.applazada.View.DanhGia.DanhSachDanhGiaActivity;
 import com.example.applazada.View.DanhGia.ThemDanhGiaActivity;
 import com.example.applazada.View.GioHang.GioHangActivity;
+import com.example.applazada.View.ThanhToan.ThanhToanActivity;
 import com.example.applazada.View.TrangChu.TrangChuActivity;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
@@ -59,14 +60,14 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     int masp;
     boolean onPause = false;
     SanPham sanPhamGioHang;
-
+    Button btnMuaNgay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
 
-
+        btnMuaNgay = findViewById(R.id.btnMuaNgay);
         masp = getIntent().getIntExtra("masp", 0);
         txtTenSanPham = findViewById(R.id.txtTenSanPham);
         txtThongTinChiTiet = findViewById(R.id.txtThongTinChiTiet);
@@ -83,6 +84,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         layoutDots = findViewById(R.id.layoutdot);
         recyclerView = findViewById(R.id.recyclerDanhGia);
 
+
         presenterLogicChiTietSanPham = new PresenterLogicChiTietSanPham(this);
         presenterLogicChiTietSanPham.LayChiTietSanPham(masp);
         presenterLogicChiTietSanPham.LayDanhSachDanhGiaCuaSanPham(masp, 0);
@@ -90,6 +92,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
         txtVietDanhGia.setOnClickListener(this);
         txtXemTatCaNhanXet.setOnClickListener(this);
         imgThemGioHang.setOnClickListener(this);
+        btnMuaNgay.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -262,8 +267,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 break;
 
             case R.id.imgThemGioHang:
-                Fragment fragment = fragmentList.get(0);
-                View view1 = fragment.getView();
+                Fragment fragment1 = fragmentList.get(0);
+                View view1 = fragment1.getView();
                 ImageView imageView = view1.findViewById(R.id.imgHinhSlider);
                 Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -273,6 +278,22 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
                 sanPhamGioHang.setSOLUONG(1);
 
                 presenterLogicChiTietSanPham.ThemGioHang(sanPhamGioHang, this);
+                break;
+
+            case R.id.btnMuaNgay:
+                Fragment fragment2 = fragmentList.get(0);
+                View view2 = fragment2.getView();
+                ImageView imageView2 = view2.findViewById(R.id.imgHinhSlider);
+                Bitmap bitmap2 = ((BitmapDrawable) imageView2.getDrawable()).getBitmap();
+                ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
+                bitmap2.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream2);
+                byte[] hinhsanphamgiohang2 = byteArrayOutputStream2.toByteArray();
+                sanPhamGioHang.setHinhgiohang(hinhsanphamgiohang2);
+                sanPhamGioHang.setSOLUONG(1);
+
+                presenterLogicChiTietSanPham.ThemGioHang(sanPhamGioHang, this);
+                Intent iThanhToan = new Intent(ChiTietSanPhamActivity.this, ThanhToanActivity.class);
+                startActivity(iThanhToan);
                 break;
         }
 
