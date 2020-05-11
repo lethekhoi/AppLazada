@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.applazada.Adapter.ViewPagerAdapterDangNhap;
 import com.example.applazada.R;

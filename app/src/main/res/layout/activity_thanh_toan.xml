@@ -27,6 +27,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -34,38 +35,44 @@
             android:textColor="@color/colorFacebook" />
 
         <EditText
+            android:id="@+id/edtTenNguoiNhan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/border_thanhtoan"
             android:hint="Tên người nhận"
-            android:textSize="10sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/edtDiaChi"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/border_thanhtoan"
             android:gravity="top"
             android:hint="Địa chỉ giao hàng"
-            android:textSize="10sp" />
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp" />
 
         <EditText
-            android:textSize="10sp"
+            android:id="@+id/edtSoDT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/border_thanhtoan"
             android:gravity="top"
-            android:hint="Số điện thoại " />
+            android:hint="Số điện thoại "
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp" />
 
         <TextView
-            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Tùy chọn giap hàng"
-            android:textColor="@color/colorFacebook" />
+            android:textColor="@color/colorFacebook"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,6 +81,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/imgThanhToanTrucTiep"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
@@ -82,6 +90,7 @@
                 android:src="@drawable/ship" />
 
             <ImageButton
+                android:id="@+id/imgChuyenKhoan"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
@@ -91,6 +100,7 @@
         </LinearLayout>
 
         <CheckBox
+            android:id="@+id/cbCamKet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -98,6 +108,7 @@
             android:textColor="@color/colorFacebook" />
 
         <Button
+            android:id="@+id/btnThanhToan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
