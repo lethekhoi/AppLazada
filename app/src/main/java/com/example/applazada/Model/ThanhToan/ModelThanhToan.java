@@ -53,7 +53,7 @@ public class ModelThanhToan {
         hsDiaChi.put("diachi", String.valueOf(hoaDon.getDIACHI()));
 
         HashMap<String, String> hsChuyenKhoan = new HashMap<>();
-        hsChuyenKhoan.put("chuyenkhoan", "0");
+        hsChuyenKhoan.put("chuyenkhoan", String.valueOf(hoaDon.getClass()));
 
 
         attrs.add(hsHam);

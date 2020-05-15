@@ -12,6 +12,7 @@ public class SanPham {
     int LUOTMUA;
 
 
+    ChiTietKhuyenMai chiTietKhuyenMai;
     int SOLUONGTONKHO;
     String ANHLON;
     String THONGTIN;
@@ -20,6 +21,15 @@ public class SanPham {
     List<ChiTietSanPham> chiTietSanPhamList;
     String TENNV;
     byte[] hinhgiohang;
+
+
+    public ChiTietKhuyenMai getChiTietKhuyenMai() {
+        return chiTietKhuyenMai;
+    }
+
+    public void setChiTietKhuyenMai(ChiTietKhuyenMai chiTietKhuyenMai) {
+        this.chiTietKhuyenMai = chiTietKhuyenMai;
+    }
 
     public int getSOLUONGTONKHO() {
         return SOLUONGTONKHO;
