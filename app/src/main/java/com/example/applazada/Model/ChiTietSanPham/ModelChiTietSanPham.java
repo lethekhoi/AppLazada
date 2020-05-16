@@ -1,6 +1,7 @@
 package com.example.applazada.Model.ChiTietSanPham;
 
 import com.example.applazada.ConnectInternet.DownloadJSON;
+import com.example.applazada.Model.ObjectClass.ChiTietKhuyenMai;
 import com.example.applazada.Model.ObjectClass.ChiTietSanPham;
 import com.example.applazada.Model.ObjectClass.DanhGia;
 import com.example.applazada.Model.ObjectClass.SanPham;
@@ -109,6 +110,11 @@ public class ModelChiTietSanPham {
             for (int i = 0; i < dem; i++) {
 
                 JSONObject object = jsonArrayDanhSachSanPham.getJSONObject(i);
+
+                ChiTietKhuyenMai chiTietKhuyenMai = new ChiTietKhuyenMai();
+                chiTietKhuyenMai.setPHANTRAMKM(object.getInt("PHANTRAMKM"));
+
+                sanPham.setChiTietKhuyenMai(chiTietKhuyenMai);
                 sanPham.setMASP(object.getInt("MASP"));
                 sanPham.setTENSP(object.getString("TENSP"));
                 sanPham.setGIA(object.getInt("GIATIEN"));

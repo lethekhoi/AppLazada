@@ -2,6 +2,7 @@ package com.example.applazada.View.ChiTietSanPham;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.applazada.Adapter.AdapterDanhGia;
 import com.example.applazada.Adapter.AdapterViewPagerSlider;
+import com.example.applazada.Model.ObjectClass.ChiTietKhuyenMai;
 import com.example.applazada.Model.ObjectClass.ChiTietSanPham;
 import com.example.applazada.Model.ObjectClass.DanhGia;
 import com.example.applazada.Model.ObjectClass.SanPham;
@@ -52,7 +54,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     TextView[] txtDots;
     LinearLayout layoutDots, lnThongSoKyThuat;
     List<Fragment> fragmentList;
-    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet, txtGioHang;
+    TextView txtTenSanPham, txtGiaTien, txtTenCuaHangDongGoi, txtThongTinChiTiet, txtVietDanhGia, txtXemTatCaNhanXet, txtGioHang, txtGiamGia;
     ImageView imgXemThem, imgThemGioHang;
     Boolean kiemtraxochitiet = false;
     List<DanhGia> danhGiaList;
@@ -66,7 +68,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_san_pham);
-
+        txtGiamGia = findViewById(R.id.txtGiamGia);
         btnMuaNgay = findViewById(R.id.btnMuaNgay);
         masp = getIntent().getIntExtra("masp", 0);
         txtTenSanPham = findViewById(R.id.txtTenSanPham);
@@ -122,8 +124,27 @@ public class ChiTietSanPhamActivity extends AppCompatActivity implements ViewChi
 
         txtTenSanPham.setText(sanPham.getTENSP());
         txtTenCuaHangDongGoi.setText(sanPham.getTENNV());
+
+
+        int giatien = sanPham.getGIA();
+        ChiTietKhuyenMai chiTietKhuyenMai = sanPham.getChiTietKhuyenMai();
+        if (chiTietKhuyenMai != null) {
+            int phantramkm = chiTietKhuyenMai.getPHANTRAMKM();
+            if (phantramkm != 0) {
+
+                NumberFormat numberFormat = new DecimalFormat("###,###");
+                String gia = numberFormat.format(giatien);
+
+                txtGiamGia.setVisibility(View.VISIBLE);
+                txtGiamGia.setPaintFlags(txtGiamGia.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                txtGiamGia.setText(gia + " VND");
+                giatien = giatien * (100 - phantramkm) / 100;
+            }
+
+        }
+
         NumberFormat numberFormat = new DecimalFormat("###,###");
-        String gia = numberFormat.format(sanPham.getGIA()).toString();
+        String gia = numberFormat.format(giatien);
         txtGiaTien.setText(gia + " VND");
         txtThongTinChiTiet.setText(sanPham.getTHONGTIN().subSequence(0, 100));
         if (sanPham.getTHONGTIN().length() < 100) {

@@ -1,14 +1,5 @@
 package com.example.applazada.View.TrangChu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
-import androidx.core.view.ViewCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +9,15 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
+import androidx.core.view.ViewCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.applazada.Adapter.ExpandAdapter;
 import com.example.applazada.Adapter.ViewPagerAdapter;
@@ -29,6 +28,7 @@ import com.example.applazada.Presenter.TrangChu.PresenterLogicXuLyMenu;
 import com.example.applazada.R;
 import com.example.applazada.View.DangNhap_DangKy.DangNhapActivity;
 import com.example.applazada.View.GioHang.GioHangActivity;
+import com.example.applazada.View.TimKiem.TimKiemActivity;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
@@ -213,7 +213,11 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
                     this.onCreateOptionsMenu(menu);
                 }
                 break;
+            case R.id.itSearch:
+                Intent iTimKiem = new Intent(this, TimKiemActivity.class);
+                startActivity(iTimKiem);
 
+                break;
 
         }
         return true;
@@ -239,10 +243,20 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         if (collapsingToolbarLayout.getHeight() + verticalOffset <= (1.5 * ViewCompat.getMinimumHeight(collapsingToolbarLayout))) {
             LinearLayout linearLayout = appBarLayout.findViewById(R.id.lnSearch);
             linearLayout.animate().alpha(0).setDuration(200);
+            MenuItem itSearch = menu.findItem(R.id.itSearch);
+            itSearch.setVisible(true);
 
         } else {
             LinearLayout linearLayout = appBarLayout.findViewById(R.id.lnSearch);
             linearLayout.animate().alpha(1).setDuration(200);
+            try {
+                MenuItem itSearch = menu.findItem(R.id.itSearch);
+                itSearch.setVisible(false);
+            } catch (Exception e) {
+
+            }
+
+
         }
     }
 
