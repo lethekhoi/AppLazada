@@ -1,9 +1,15 @@
 package com.example.applazada.View.TimKiem;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +30,7 @@ public class TimKiemActivity extends AppCompatActivity implements ViewTimKiem, I
     Toolbar toolbar;
     RecyclerView recyclerView;
     PresenterLogicTimKiem presenterLogicTimKiem;
+    String search = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,12 @@ public class TimKiemActivity extends AppCompatActivity implements ViewTimKiem, I
         toolbar.setTitle(" ");
         presenterLogicTimKiem = new PresenterLogicTimKiem(this);
         setSupportActionBar(toolbar);
+        Intent intent = getIntent();
+        String search = intent.getStringExtra("search");
+        if (search != null && search != "") {
+            presenterLogicTimKiem.TimKiemSanPhamThjeoTenSanPham(search, 0);
+        }
+
     }
 
     @Override
@@ -43,6 +56,7 @@ public class TimKiemActivity extends AppCompatActivity implements ViewTimKiem, I
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(itSearch);
         searchView.setIconified(false);
         searchView.setOnQueryTextListener(this);
+
         return true;
     }
 
@@ -58,7 +72,7 @@ public class TimKiemActivity extends AppCompatActivity implements ViewTimKiem, I
 
     @Override
     public void TimKiemThatBai() {
-
+        Toast.makeText(this, "Không có thông tin của sản phẩm bạn muốn tìm kiếm ", Toast.LENGTH_SHORT).show();
     }
 
     @Override

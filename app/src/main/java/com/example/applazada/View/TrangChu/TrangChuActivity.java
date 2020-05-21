@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -38,6 +40,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.internal.auth.zzz;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -47,7 +50,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener {
+public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu, GoogleApiClient.OnConnectionFailedListener, AppBarLayout.OnOffsetChangedListener, SearchView.OnQueryTextListener {
     public static final String SERVER_NAME = "http://10.0.3.2//weblazada/loaisanpham.php";
     public static final String SERVER = "http://10.0.3.2//weblazada";
     ViewPager viewPager;
@@ -62,6 +65,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
     String TenNguoiDung = "";
     AccessToken accessToken;
     Menu menu;
+    SearchView searchView;
     TextView txtGioHang;
     ModelDangNhap modelDangNhap;
     MenuItem itemDangNhap, menuItDangXuat;
@@ -76,7 +80,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         setContentView(R.layout.activity_trang_chu);
 
         drawerLayout = findViewById(R.id.drawerlayouttrangchu);
-
+        searchView = findViewById(R.id.SearchView);
         viewPager = findViewById(R.id.viewpager);
         expandableListView = findViewById(R.id.epMenu);
 
@@ -107,7 +111,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
 
         mGoogleApiClient = modelDangNhap.LayGoogleApiClient(this, this);
         appBarLayout.addOnOffsetChangedListener(this);
-
+        searchView.setOnQueryTextListener(this);
 
     }
 
@@ -215,6 +219,7 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
                 break;
             case R.id.itSearch:
                 Intent iTimKiem = new Intent(this, TimKiemActivity.class);
+                iTimKiem.putExtra("search", "");
                 startActivity(iTimKiem);
 
                 break;
@@ -277,4 +282,16 @@ public class TrangChuActivity extends AppCompatActivity implements ViewXuLyMenu,
         onPause = true;
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        Intent iTimKiem = new Intent(this, TimKiemActivity.class);
+        iTimKiem.putExtra("search", s);
+        startActivity(iTimKiem);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
+    }
 }

@@ -54,18 +54,17 @@
                         app:layout_collapseMode="parallax"
                         app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed|snap">
 
-                        <Button
+                        <SearchView
+                            android:id="@+id/SearchView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
                             android:layout_weight="1"
-                            android:background="@drawable/bgsearch"
-                            android:drawableLeft="@drawable/ic_search_black_24dp"
                             android:paddingLeft="10dp"
-                            android:text="Tìm kiếm trên Lazada"
+                            android:queryHint="Tìm kiếm trên Lazada"
                             android:textAlignment="viewStart"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorGray" />
+                            app:theme="@style/SearchView" />
 
                         <View
                             android:layout_width="1dp"
